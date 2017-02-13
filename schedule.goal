@@ -1,0 +1,6391 @@
+num_ranks 256
+
+rank 0 {
+/* Reduce begin */
+l1: recv 1800b from 1 tag 1000000
+l2: recv 1800b from 2 tag 1000000
+l3: recv 1800b from 4 tag 1000000
+l4: recv 1800b from 8 tag 1000000
+l5: recv 1800b from 16 tag 1000000
+l6: recv 1800b from 32 tag 1000000
+l7: recv 1800b from 64 tag 1000000
+l8: recv 1800b from 128 tag 1000000
+l9: calc 0
+l9 requires l1
+l9 requires l2
+l9 requires l3
+l9 requires l4
+l9 requires l5
+l9 requires l6
+l9 requires l7
+l9 requires l8
+l10: calc 806105000
+l1 requires l10
+l2 requires l10
+l3 requires l10
+l4 requires l10
+l5 requires l10
+l6 requires l10
+l7 requires l10
+l8 requires l10
+/* Reduce end */
+/* Bcast begin */
+l11: send 4b to 1 tag 1000001
+l12: send 4b to 2 tag 1000001
+l13: send 4b to 4 tag 1000001
+l14: send 4b to 8 tag 1000001
+l15: send 4b to 16 tag 1000001
+l16: send 4b to 32 tag 1000001
+l17: send 4b to 64 tag 1000001
+l18: send 4b to 128 tag 1000001
+l19: calc 0
+l19 requires l11
+l19 requires l12
+l19 requires l13
+l19 requires l14
+l19 requires l15
+l19 requires l16
+l19 requires l17
+l19 requires l18
+l20: calc 29779000
+l11 requires l20
+l12 requires l20
+l13 requires l20
+l14 requires l20
+l15 requires l20
+l16 requires l20
+l17 requires l20
+l18 requires l20
+l20 requires l9
+/* Bcast end */
+l21: calc 219615000
+l21 requires l19
+}
+
+rank 1 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 3 tag 1000000
+l1 requires l2
+l3: recv 1800b from 5 tag 1000000
+l1 requires l3
+l4: recv 1800b from 9 tag 1000000
+l1 requires l4
+l5: recv 1800b from 17 tag 1000000
+l1 requires l5
+l6: recv 1800b from 33 tag 1000000
+l1 requires l6
+l7: recv 1800b from 65 tag 1000000
+l1 requires l7
+l8: recv 1800b from 129 tag 1000000
+l1 requires l8
+l9: calc 0
+l9 requires l1
+l10: calc 627949000
+l2 requires l10
+l3 requires l10
+l4 requires l10
+l5 requires l10
+l6 requires l10
+l7 requires l10
+l8 requires l10
+/* Reduce end */
+/* Bcast begin */
+l11: recv 4b from 0 tag 1000001
+l12: send 4b to 3 tag 1000001
+l12 requires l11
+l13: send 4b to 5 tag 1000001
+l13 requires l11
+l14: send 4b to 9 tag 1000001
+l14 requires l11
+l15: send 4b to 17 tag 1000001
+l15 requires l11
+l16: send 4b to 33 tag 1000001
+l16 requires l11
+l17: send 4b to 65 tag 1000001
+l17 requires l11
+l18: send 4b to 129 tag 1000001
+l18 requires l11
+l19: calc 0
+l19 requires l12
+l19 requires l13
+l19 requires l14
+l19 requires l15
+l19 requires l16
+l19 requires l17
+l19 requires l18
+l20: calc 4771000
+l11 requires l20
+l20 requires l9
+/* Bcast end */
+l21: calc 5727000
+l21 requires l19
+}
+
+rank 2 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 6 tag 1000000
+l1 requires l2
+l3: recv 1800b from 10 tag 1000000
+l1 requires l3
+l4: recv 1800b from 18 tag 1000000
+l1 requires l4
+l5: recv 1800b from 34 tag 1000000
+l1 requires l5
+l6: recv 1800b from 66 tag 1000000
+l1 requires l6
+l7: recv 1800b from 130 tag 1000000
+l1 requires l7
+l8: calc 0
+l8 requires l1
+l9: calc 487069000
+l2 requires l9
+l3 requires l9
+l4 requires l9
+l5 requires l9
+l6 requires l9
+l7 requires l9
+/* Reduce end */
+/* Bcast begin */
+l10: recv 4b from 0 tag 1000001
+l11: send 4b to 6 tag 1000001
+l11 requires l10
+l12: send 4b to 10 tag 1000001
+l12 requires l10
+l13: send 4b to 18 tag 1000001
+l13 requires l10
+l14: send 4b to 34 tag 1000001
+l14 requires l10
+l15: send 4b to 66 tag 1000001
+l15 requires l10
+l16: send 4b to 130 tag 1000001
+l16 requires l10
+l17: calc 0
+l17 requires l11
+l17 requires l12
+l17 requires l13
+l17 requires l14
+l17 requires l15
+l17 requires l16
+l18: calc 5123000
+l10 requires l18
+l18 requires l8
+/* Bcast end */
+l19: calc 4852000
+l19 requires l17
+}
+
+rank 3 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 7 tag 1000000
+l1 requires l2
+l3: recv 1800b from 11 tag 1000000
+l1 requires l3
+l4: recv 1800b from 19 tag 1000000
+l1 requires l4
+l5: recv 1800b from 35 tag 1000000
+l1 requires l5
+l6: recv 1800b from 67 tag 1000000
+l1 requires l6
+l7: recv 1800b from 131 tag 1000000
+l1 requires l7
+l8: calc 0
+l8 requires l1
+l9: calc 504649000
+l2 requires l9
+l3 requires l9
+l4 requires l9
+l5 requires l9
+l6 requires l9
+l7 requires l9
+/* Reduce end */
+/* Bcast begin */
+l10: recv 4b from 1 tag 1000001
+l11: send 4b to 7 tag 1000001
+l11 requires l10
+l12: send 4b to 11 tag 1000001
+l12 requires l10
+l13: send 4b to 19 tag 1000001
+l13 requires l10
+l14: send 4b to 35 tag 1000001
+l14 requires l10
+l15: send 4b to 67 tag 1000001
+l15 requires l10
+l16: send 4b to 131 tag 1000001
+l16 requires l10
+l17: calc 0
+l17 requires l11
+l17 requires l12
+l17 requires l13
+l17 requires l14
+l17 requires l15
+l17 requires l16
+l18: calc 5221000
+l10 requires l18
+l18 requires l8
+/* Bcast end */
+l19: calc 5424000
+l19 requires l17
+}
+
+rank 4 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 12 tag 1000000
+l1 requires l2
+l3: recv 1800b from 20 tag 1000000
+l1 requires l3
+l4: recv 1800b from 36 tag 1000000
+l1 requires l4
+l5: recv 1800b from 68 tag 1000000
+l1 requires l5
+l6: recv 1800b from 132 tag 1000000
+l1 requires l6
+l7: calc 0
+l7 requires l1
+l8: calc 461567000
+l2 requires l8
+l3 requires l8
+l4 requires l8
+l5 requires l8
+l6 requires l8
+/* Reduce end */
+/* Bcast begin */
+l9: recv 4b from 0 tag 1000001
+l10: send 4b to 12 tag 1000001
+l10 requires l9
+l11: send 4b to 20 tag 1000001
+l11 requires l9
+l12: send 4b to 36 tag 1000001
+l12 requires l9
+l13: send 4b to 68 tag 1000001
+l13 requires l9
+l14: send 4b to 132 tag 1000001
+l14 requires l9
+l15: calc 0
+l15 requires l10
+l15 requires l11
+l15 requires l12
+l15 requires l13
+l15 requires l14
+l16: calc 5693000
+l9 requires l16
+l16 requires l7
+/* Bcast end */
+l17: calc 4556000
+l17 requires l15
+}
+
+rank 5 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 13 tag 1000000
+l1 requires l2
+l3: recv 1800b from 21 tag 1000000
+l1 requires l3
+l4: recv 1800b from 37 tag 1000000
+l1 requires l4
+l5: recv 1800b from 69 tag 1000000
+l1 requires l5
+l6: recv 1800b from 133 tag 1000000
+l1 requires l6
+l7: calc 0
+l7 requires l1
+l8: calc 544210000
+l2 requires l8
+l3 requires l8
+l4 requires l8
+l5 requires l8
+l6 requires l8
+/* Reduce end */
+/* Bcast begin */
+l9: recv 4b from 1 tag 1000001
+l10: send 4b to 13 tag 1000001
+l10 requires l9
+l11: send 4b to 21 tag 1000001
+l11 requires l9
+l12: send 4b to 37 tag 1000001
+l12 requires l9
+l13: send 4b to 69 tag 1000001
+l13 requires l9
+l14: send 4b to 133 tag 1000001
+l14 requires l9
+l15: calc 0
+l15 requires l10
+l15 requires l11
+l15 requires l12
+l15 requires l13
+l15 requires l14
+l16: calc 4985000
+l9 requires l16
+l16 requires l7
+/* Bcast end */
+l17: calc 9900000
+l17 requires l15
+}
+
+rank 6 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: recv 1800b from 14 tag 1000000
+l1 requires l2
+l3: recv 1800b from 22 tag 1000000
+l1 requires l3
+l4: recv 1800b from 38 tag 1000000
+l1 requires l4
+l5: recv 1800b from 70 tag 1000000
+l1 requires l5
+l6: recv 1800b from 134 tag 1000000
+l1 requires l6
+l7: calc 0
+l7 requires l1
+l8: calc 681713000
+l2 requires l8
+l3 requires l8
+l4 requires l8
+l5 requires l8
+l6 requires l8
+/* Reduce end */
+/* Bcast begin */
+l9: recv 4b from 2 tag 1000001
+l10: send 4b to 14 tag 1000001
+l10 requires l9
+l11: send 4b to 22 tag 1000001
+l11 requires l9
+l12: send 4b to 38 tag 1000001
+l12 requires l9
+l13: send 4b to 70 tag 1000001
+l13 requires l9
+l14: send 4b to 134 tag 1000001
+l14 requires l9
+l15: calc 0
+l15 requires l10
+l15 requires l11
+l15 requires l12
+l15 requires l13
+l15 requires l14
+l16: calc 5646000
+l9 requires l16
+l16 requires l7
+/* Bcast end */
+l17: calc 5813000
+l17 requires l15
+}
+
+rank 7 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: recv 1800b from 15 tag 1000000
+l1 requires l2
+l3: recv 1800b from 23 tag 1000000
+l1 requires l3
+l4: recv 1800b from 39 tag 1000000
+l1 requires l4
+l5: recv 1800b from 71 tag 1000000
+l1 requires l5
+l6: recv 1800b from 135 tag 1000000
+l1 requires l6
+l7: calc 0
+l7 requires l1
+l8: calc 620661000
+l2 requires l8
+l3 requires l8
+l4 requires l8
+l5 requires l8
+l6 requires l8
+/* Reduce end */
+/* Bcast begin */
+l9: recv 4b from 3 tag 1000001
+l10: send 4b to 15 tag 1000001
+l10 requires l9
+l11: send 4b to 23 tag 1000001
+l11 requires l9
+l12: send 4b to 39 tag 1000001
+l12 requires l9
+l13: send 4b to 71 tag 1000001
+l13 requires l9
+l14: send 4b to 135 tag 1000001
+l14 requires l9
+l15: calc 0
+l15 requires l10
+l15 requires l11
+l15 requires l12
+l15 requires l13
+l15 requires l14
+l16: calc 5883000
+l9 requires l16
+l16 requires l7
+/* Bcast end */
+l17: calc 7650000
+l17 requires l15
+}
+
+rank 8 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 24 tag 1000000
+l1 requires l2
+l3: recv 1800b from 40 tag 1000000
+l1 requires l3
+l4: recv 1800b from 72 tag 1000000
+l1 requires l4
+l5: recv 1800b from 136 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 681605000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 0 tag 1000001
+l9: send 4b to 24 tag 1000001
+l9 requires l8
+l10: send 4b to 40 tag 1000001
+l10 requires l8
+l11: send 4b to 72 tag 1000001
+l11 requires l8
+l12: send 4b to 136 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 6043000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 5279000
+l15 requires l13
+}
+
+rank 9 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 25 tag 1000000
+l1 requires l2
+l3: recv 1800b from 41 tag 1000000
+l1 requires l3
+l4: recv 1800b from 73 tag 1000000
+l1 requires l4
+l5: recv 1800b from 137 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 691999000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 1 tag 1000001
+l9: send 4b to 25 tag 1000001
+l9 requires l8
+l10: send 4b to 41 tag 1000001
+l10 requires l8
+l11: send 4b to 73 tag 1000001
+l11 requires l8
+l12: send 4b to 137 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5346000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 5677000
+l15 requires l13
+}
+
+rank 10 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: recv 1800b from 26 tag 1000000
+l1 requires l2
+l3: recv 1800b from 42 tag 1000000
+l1 requires l3
+l4: recv 1800b from 74 tag 1000000
+l1 requires l4
+l5: recv 1800b from 138 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 886503000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 2 tag 1000001
+l9: send 4b to 26 tag 1000001
+l9 requires l8
+l10: send 4b to 42 tag 1000001
+l10 requires l8
+l11: send 4b to 74 tag 1000001
+l11 requires l8
+l12: send 4b to 138 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5501000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 7503000
+l15 requires l13
+}
+
+rank 11 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: recv 1800b from 27 tag 1000000
+l1 requires l2
+l3: recv 1800b from 43 tag 1000000
+l1 requires l3
+l4: recv 1800b from 75 tag 1000000
+l1 requires l4
+l5: recv 1800b from 139 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 446295000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 3 tag 1000001
+l9: send 4b to 27 tag 1000001
+l9 requires l8
+l10: send 4b to 43 tag 1000001
+l10 requires l8
+l11: send 4b to 75 tag 1000001
+l11 requires l8
+l12: send 4b to 139 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5930000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 9590000
+l15 requires l13
+}
+
+rank 12 {
+/* Reduce begin */
+l1: send 1800b to 4 tag 1000000
+l2: recv 1800b from 28 tag 1000000
+l1 requires l2
+l3: recv 1800b from 44 tag 1000000
+l1 requires l3
+l4: recv 1800b from 76 tag 1000000
+l1 requires l4
+l5: recv 1800b from 140 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 626831000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 4 tag 1000001
+l9: send 4b to 28 tag 1000001
+l9 requires l8
+l10: send 4b to 44 tag 1000001
+l10 requires l8
+l11: send 4b to 76 tag 1000001
+l11 requires l8
+l12: send 4b to 140 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5391000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 6343000
+l15 requires l13
+}
+
+rank 13 {
+/* Reduce begin */
+l1: send 1800b to 5 tag 1000000
+l2: recv 1800b from 29 tag 1000000
+l1 requires l2
+l3: recv 1800b from 45 tag 1000000
+l1 requires l3
+l4: recv 1800b from 77 tag 1000000
+l1 requires l4
+l5: recv 1800b from 141 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 525015000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 5 tag 1000001
+l9: send 4b to 29 tag 1000001
+l9 requires l8
+l10: send 4b to 45 tag 1000001
+l10 requires l8
+l11: send 4b to 77 tag 1000001
+l11 requires l8
+l12: send 4b to 141 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 4824000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 10293000
+l15 requires l13
+}
+
+rank 14 {
+/* Reduce begin */
+l1: send 1800b to 6 tag 1000000
+l2: recv 1800b from 30 tag 1000000
+l1 requires l2
+l3: recv 1800b from 46 tag 1000000
+l1 requires l3
+l4: recv 1800b from 78 tag 1000000
+l1 requires l4
+l5: recv 1800b from 142 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 560098000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 6 tag 1000001
+l9: send 4b to 30 tag 1000001
+l9 requires l8
+l10: send 4b to 46 tag 1000001
+l10 requires l8
+l11: send 4b to 78 tag 1000001
+l11 requires l8
+l12: send 4b to 142 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5353000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 9658000
+l15 requires l13
+}
+
+rank 15 {
+/* Reduce begin */
+l1: send 1800b to 7 tag 1000000
+l2: recv 1800b from 31 tag 1000000
+l1 requires l2
+l3: recv 1800b from 47 tag 1000000
+l1 requires l3
+l4: recv 1800b from 79 tag 1000000
+l1 requires l4
+l5: recv 1800b from 143 tag 1000000
+l1 requires l5
+l6: calc 0
+l6 requires l1
+l7: calc 702765000
+l2 requires l7
+l3 requires l7
+l4 requires l7
+l5 requires l7
+/* Reduce end */
+/* Bcast begin */
+l8: recv 4b from 7 tag 1000001
+l9: send 4b to 31 tag 1000001
+l9 requires l8
+l10: send 4b to 47 tag 1000001
+l10 requires l8
+l11: send 4b to 79 tag 1000001
+l11 requires l8
+l12: send 4b to 143 tag 1000001
+l12 requires l8
+l13: calc 0
+l13 requires l9
+l13 requires l10
+l13 requires l11
+l13 requires l12
+l14: calc 5586000
+l8 requires l14
+l14 requires l6
+/* Bcast end */
+l15: calc 8054000
+l15 requires l13
+}
+
+rank 16 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 48 tag 1000000
+l1 requires l2
+l3: recv 1800b from 80 tag 1000000
+l1 requires l3
+l4: recv 1800b from 144 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 788561000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 0 tag 1000001
+l8: send 4b to 48 tag 1000001
+l8 requires l7
+l9: send 4b to 80 tag 1000001
+l9 requires l7
+l10: send 4b to 144 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 10444000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7004000
+l13 requires l11
+}
+
+rank 17 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 49 tag 1000000
+l1 requires l2
+l3: recv 1800b from 81 tag 1000000
+l1 requires l3
+l4: recv 1800b from 145 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 618833000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 1 tag 1000001
+l8: send 4b to 49 tag 1000001
+l8 requires l7
+l9: send 4b to 81 tag 1000001
+l9 requires l7
+l10: send 4b to 145 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5183000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 14754000
+l13 requires l11
+}
+
+rank 18 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: recv 1800b from 50 tag 1000000
+l1 requires l2
+l3: recv 1800b from 82 tag 1000000
+l1 requires l3
+l4: recv 1800b from 146 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 1024299000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 2 tag 1000001
+l8: send 4b to 50 tag 1000001
+l8 requires l7
+l9: send 4b to 82 tag 1000001
+l9 requires l7
+l10: send 4b to 146 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5513000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7993000
+l13 requires l11
+}
+
+rank 19 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: recv 1800b from 51 tag 1000000
+l1 requires l2
+l3: recv 1800b from 83 tag 1000000
+l1 requires l3
+l4: recv 1800b from 147 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 558053000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 3 tag 1000001
+l8: send 4b to 51 tag 1000001
+l8 requires l7
+l9: send 4b to 83 tag 1000001
+l9 requires l7
+l10: send 4b to 147 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 4994000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 8150000
+l13 requires l11
+}
+
+rank 20 {
+/* Reduce begin */
+l1: send 1800b to 4 tag 1000000
+l2: recv 1800b from 52 tag 1000000
+l1 requires l2
+l3: recv 1800b from 84 tag 1000000
+l1 requires l3
+l4: recv 1800b from 148 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 932636000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 4 tag 1000001
+l8: send 4b to 52 tag 1000001
+l8 requires l7
+l9: send 4b to 84 tag 1000001
+l9 requires l7
+l10: send 4b to 148 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5272000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7612000
+l13 requires l11
+}
+
+rank 21 {
+/* Reduce begin */
+l1: send 1800b to 5 tag 1000000
+l2: recv 1800b from 53 tag 1000000
+l1 requires l2
+l3: recv 1800b from 85 tag 1000000
+l1 requires l3
+l4: recv 1800b from 149 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 454950000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 5 tag 1000001
+l8: send 4b to 53 tag 1000001
+l8 requires l7
+l9: send 4b to 85 tag 1000001
+l9 requires l7
+l10: send 4b to 149 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5047000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 6562000
+l13 requires l11
+}
+
+rank 22 {
+/* Reduce begin */
+l1: send 1800b to 6 tag 1000000
+l2: recv 1800b from 54 tag 1000000
+l1 requires l2
+l3: recv 1800b from 86 tag 1000000
+l1 requires l3
+l4: recv 1800b from 150 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 604746000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 6 tag 1000001
+l8: send 4b to 54 tag 1000001
+l8 requires l7
+l9: send 4b to 86 tag 1000001
+l9 requires l7
+l10: send 4b to 150 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5526000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 11507000
+l13 requires l11
+}
+
+rank 23 {
+/* Reduce begin */
+l1: send 1800b to 7 tag 1000000
+l2: recv 1800b from 55 tag 1000000
+l1 requires l2
+l3: recv 1800b from 87 tag 1000000
+l1 requires l3
+l4: recv 1800b from 151 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 750641000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 7 tag 1000001
+l8: send 4b to 55 tag 1000001
+l8 requires l7
+l9: send 4b to 87 tag 1000001
+l9 requires l7
+l10: send 4b to 151 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5427000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 8754000
+l13 requires l11
+}
+
+rank 24 {
+/* Reduce begin */
+l1: send 1800b to 8 tag 1000000
+l2: recv 1800b from 56 tag 1000000
+l1 requires l2
+l3: recv 1800b from 88 tag 1000000
+l1 requires l3
+l4: recv 1800b from 152 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 632952000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 8 tag 1000001
+l8: send 4b to 56 tag 1000001
+l8 requires l7
+l9: send 4b to 88 tag 1000001
+l9 requires l7
+l10: send 4b to 152 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5876000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7836000
+l13 requires l11
+}
+
+rank 25 {
+/* Reduce begin */
+l1: send 1800b to 9 tag 1000000
+l2: recv 1800b from 57 tag 1000000
+l1 requires l2
+l3: recv 1800b from 89 tag 1000000
+l1 requires l3
+l4: recv 1800b from 153 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 494188000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 9 tag 1000001
+l8: send 4b to 57 tag 1000001
+l8 requires l7
+l9: send 4b to 89 tag 1000001
+l9 requires l7
+l10: send 4b to 153 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5144000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 9460000
+l13 requires l11
+}
+
+rank 26 {
+/* Reduce begin */
+l1: send 1800b to 10 tag 1000000
+l2: recv 1800b from 58 tag 1000000
+l1 requires l2
+l3: recv 1800b from 90 tag 1000000
+l1 requires l3
+l4: recv 1800b from 154 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 521569000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 10 tag 1000001
+l8: send 4b to 58 tag 1000001
+l8 requires l7
+l9: send 4b to 90 tag 1000001
+l9 requires l7
+l10: send 4b to 154 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5116000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7311000
+l13 requires l11
+}
+
+rank 27 {
+/* Reduce begin */
+l1: send 1800b to 11 tag 1000000
+l2: recv 1800b from 59 tag 1000000
+l1 requires l2
+l3: recv 1800b from 91 tag 1000000
+l1 requires l3
+l4: recv 1800b from 155 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 625091000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 11 tag 1000001
+l8: send 4b to 59 tag 1000001
+l8 requires l7
+l9: send 4b to 91 tag 1000001
+l9 requires l7
+l10: send 4b to 155 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5543000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 10335000
+l13 requires l11
+}
+
+rank 28 {
+/* Reduce begin */
+l1: send 1800b to 12 tag 1000000
+l2: recv 1800b from 60 tag 1000000
+l1 requires l2
+l3: recv 1800b from 92 tag 1000000
+l1 requires l3
+l4: recv 1800b from 156 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 578886000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 12 tag 1000001
+l8: send 4b to 60 tag 1000001
+l8 requires l7
+l9: send 4b to 92 tag 1000001
+l9 requires l7
+l10: send 4b to 156 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5502000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 9375000
+l13 requires l11
+}
+
+rank 29 {
+/* Reduce begin */
+l1: send 1800b to 13 tag 1000000
+l2: recv 1800b from 61 tag 1000000
+l1 requires l2
+l3: recv 1800b from 93 tag 1000000
+l1 requires l3
+l4: recv 1800b from 157 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 829248000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 13 tag 1000001
+l8: send 4b to 61 tag 1000001
+l8 requires l7
+l9: send 4b to 93 tag 1000001
+l9 requires l7
+l10: send 4b to 157 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5016000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 6457000
+l13 requires l11
+}
+
+rank 30 {
+/* Reduce begin */
+l1: send 1800b to 14 tag 1000000
+l2: recv 1800b from 62 tag 1000000
+l1 requires l2
+l3: recv 1800b from 94 tag 1000000
+l1 requires l3
+l4: recv 1800b from 158 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 674115000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 14 tag 1000001
+l8: send 4b to 62 tag 1000001
+l8 requires l7
+l9: send 4b to 94 tag 1000001
+l9 requires l7
+l10: send 4b to 158 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 4860000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7931000
+l13 requires l11
+}
+
+rank 31 {
+/* Reduce begin */
+l1: send 1800b to 15 tag 1000000
+l2: recv 1800b from 63 tag 1000000
+l1 requires l2
+l3: recv 1800b from 95 tag 1000000
+l1 requires l3
+l4: recv 1800b from 159 tag 1000000
+l1 requires l4
+l5: calc 0
+l5 requires l1
+l6: calc 602499000
+l2 requires l6
+l3 requires l6
+l4 requires l6
+/* Reduce end */
+/* Bcast begin */
+l7: recv 4b from 15 tag 1000001
+l8: send 4b to 63 tag 1000001
+l8 requires l7
+l9: send 4b to 95 tag 1000001
+l9 requires l7
+l10: send 4b to 159 tag 1000001
+l10 requires l7
+l11: calc 0
+l11 requires l8
+l11 requires l9
+l11 requires l10
+l12: calc 5309000
+l7 requires l12
+l12 requires l5
+/* Bcast end */
+l13: calc 7389000
+l13 requires l11
+}
+
+rank 32 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 96 tag 1000000
+l1 requires l2
+l3: recv 1800b from 160 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 660353000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 0 tag 1000001
+l7: send 4b to 96 tag 1000001
+l7 requires l6
+l8: send 4b to 160 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 6927000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5158000
+l11 requires l9
+}
+
+rank 33 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 97 tag 1000000
+l1 requires l2
+l3: recv 1800b from 161 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 638430000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 1 tag 1000001
+l7: send 4b to 97 tag 1000001
+l7 requires l6
+l8: send 4b to 161 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4755000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5228000
+l11 requires l9
+}
+
+rank 34 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: recv 1800b from 98 tag 1000000
+l1 requires l2
+l3: recv 1800b from 162 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 533399000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 2 tag 1000001
+l7: send 4b to 98 tag 1000001
+l7 requires l6
+l8: send 4b to 162 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4714000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5568000
+l11 requires l9
+}
+
+rank 35 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: recv 1800b from 99 tag 1000000
+l1 requires l2
+l3: recv 1800b from 163 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 487253000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 3 tag 1000001
+l7: send 4b to 99 tag 1000001
+l7 requires l6
+l8: send 4b to 163 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5048000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 13466000
+l11 requires l9
+}
+
+rank 36 {
+/* Reduce begin */
+l1: send 1800b to 4 tag 1000000
+l2: recv 1800b from 100 tag 1000000
+l1 requires l2
+l3: recv 1800b from 164 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 786253000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 4 tag 1000001
+l7: send 4b to 100 tag 1000001
+l7 requires l6
+l8: send 4b to 164 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 7700000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 8289000
+l11 requires l9
+}
+
+rank 37 {
+/* Reduce begin */
+l1: send 1800b to 5 tag 1000000
+l2: recv 1800b from 101 tag 1000000
+l1 requires l2
+l3: recv 1800b from 165 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 616998000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 5 tag 1000001
+l7: send 4b to 101 tag 1000001
+l7 requires l6
+l8: send 4b to 165 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5181000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7663000
+l11 requires l9
+}
+
+rank 38 {
+/* Reduce begin */
+l1: send 1800b to 6 tag 1000000
+l2: recv 1800b from 102 tag 1000000
+l1 requires l2
+l3: recv 1800b from 166 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 746465000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 6 tag 1000001
+l7: send 4b to 102 tag 1000001
+l7 requires l6
+l8: send 4b to 166 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5696000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 12033000
+l11 requires l9
+}
+
+rank 39 {
+/* Reduce begin */
+l1: send 1800b to 7 tag 1000000
+l2: recv 1800b from 103 tag 1000000
+l1 requires l2
+l3: recv 1800b from 167 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 620891000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 7 tag 1000001
+l7: send 4b to 103 tag 1000001
+l7 requires l6
+l8: send 4b to 167 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5713000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 9642000
+l11 requires l9
+}
+
+rank 40 {
+/* Reduce begin */
+l1: send 1800b to 8 tag 1000000
+l2: recv 1800b from 104 tag 1000000
+l1 requires l2
+l3: recv 1800b from 168 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 581597000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 8 tag 1000001
+l7: send 4b to 104 tag 1000001
+l7 requires l6
+l8: send 4b to 168 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 6020000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7091000
+l11 requires l9
+}
+
+rank 41 {
+/* Reduce begin */
+l1: send 1800b to 9 tag 1000000
+l2: recv 1800b from 105 tag 1000000
+l1 requires l2
+l3: recv 1800b from 169 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 506339000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 9 tag 1000001
+l7: send 4b to 105 tag 1000001
+l7 requires l6
+l8: send 4b to 169 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5558000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 6072000
+l11 requires l9
+}
+
+rank 42 {
+/* Reduce begin */
+l1: send 1800b to 10 tag 1000000
+l2: recv 1800b from 106 tag 1000000
+l1 requires l2
+l3: recv 1800b from 170 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 560752000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 10 tag 1000001
+l7: send 4b to 106 tag 1000001
+l7 requires l6
+l8: send 4b to 170 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5631000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 6095000
+l11 requires l9
+}
+
+rank 43 {
+/* Reduce begin */
+l1: send 1800b to 11 tag 1000000
+l2: recv 1800b from 107 tag 1000000
+l1 requires l2
+l3: recv 1800b from 171 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 585102000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 11 tag 1000001
+l7: send 4b to 107 tag 1000001
+l7 requires l6
+l8: send 4b to 171 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5655000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5917000
+l11 requires l9
+}
+
+rank 44 {
+/* Reduce begin */
+l1: send 1800b to 12 tag 1000000
+l2: recv 1800b from 108 tag 1000000
+l1 requires l2
+l3: recv 1800b from 172 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 585233000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 12 tag 1000001
+l7: send 4b to 108 tag 1000001
+l7 requires l6
+l8: send 4b to 172 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5290000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5158000
+l11 requires l9
+}
+
+rank 45 {
+/* Reduce begin */
+l1: send 1800b to 13 tag 1000000
+l2: recv 1800b from 109 tag 1000000
+l1 requires l2
+l3: recv 1800b from 173 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 635335000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 13 tag 1000001
+l7: send 4b to 109 tag 1000001
+l7 requires l6
+l8: send 4b to 173 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4814000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 6159000
+l11 requires l9
+}
+
+rank 46 {
+/* Reduce begin */
+l1: send 1800b to 14 tag 1000000
+l2: recv 1800b from 110 tag 1000000
+l1 requires l2
+l3: recv 1800b from 174 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 570223000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 14 tag 1000001
+l7: send 4b to 110 tag 1000001
+l7 requires l6
+l8: send 4b to 174 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5175000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5805000
+l11 requires l9
+}
+
+rank 47 {
+/* Reduce begin */
+l1: send 1800b to 15 tag 1000000
+l2: recv 1800b from 111 tag 1000000
+l1 requires l2
+l3: recv 1800b from 175 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 584644000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 15 tag 1000001
+l7: send 4b to 111 tag 1000001
+l7 requires l6
+l8: send 4b to 175 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5082000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 5905000
+l11 requires l9
+}
+
+rank 48 {
+/* Reduce begin */
+l1: send 1800b to 16 tag 1000000
+l2: recv 1800b from 112 tag 1000000
+l1 requires l2
+l3: recv 1800b from 176 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 691161000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 16 tag 1000001
+l7: send 4b to 112 tag 1000001
+l7 requires l6
+l8: send 4b to 176 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 11847000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7007000
+l11 requires l9
+}
+
+rank 49 {
+/* Reduce begin */
+l1: send 1800b to 17 tag 1000000
+l2: recv 1800b from 113 tag 1000000
+l1 requires l2
+l3: recv 1800b from 177 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 474173000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 17 tag 1000001
+l7: send 4b to 113 tag 1000001
+l7 requires l6
+l8: send 4b to 177 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4563000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7670000
+l11 requires l9
+}
+
+rank 50 {
+/* Reduce begin */
+l1: send 1800b to 18 tag 1000000
+l2: recv 1800b from 114 tag 1000000
+l1 requires l2
+l3: recv 1800b from 178 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 604409000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 18 tag 1000001
+l7: send 4b to 114 tag 1000001
+l7 requires l6
+l8: send 4b to 178 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5059000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 11457000
+l11 requires l9
+}
+
+rank 51 {
+/* Reduce begin */
+l1: send 1800b to 19 tag 1000000
+l2: recv 1800b from 115 tag 1000000
+l1 requires l2
+l3: recv 1800b from 179 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 626277000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 19 tag 1000001
+l7: send 4b to 115 tag 1000001
+l7 requires l6
+l8: send 4b to 179 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 7989000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 9357000
+l11 requires l9
+}
+
+rank 52 {
+/* Reduce begin */
+l1: send 1800b to 20 tag 1000000
+l2: recv 1800b from 116 tag 1000000
+l1 requires l2
+l3: recv 1800b from 180 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 570372000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 20 tag 1000001
+l7: send 4b to 116 tag 1000001
+l7 requires l6
+l8: send 4b to 180 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 8142000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 9450000
+l11 requires l9
+}
+
+rank 53 {
+/* Reduce begin */
+l1: send 1800b to 21 tag 1000000
+l2: recv 1800b from 117 tag 1000000
+l1 requires l2
+l3: recv 1800b from 181 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 555905000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 21 tag 1000001
+l7: send 4b to 117 tag 1000001
+l7 requires l6
+l8: send 4b to 181 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4941000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 10476000
+l11 requires l9
+}
+
+rank 54 {
+/* Reduce begin */
+l1: send 1800b to 22 tag 1000000
+l2: recv 1800b from 118 tag 1000000
+l1 requires l2
+l3: recv 1800b from 182 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 619968000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 22 tag 1000001
+l7: send 4b to 118 tag 1000001
+l7 requires l6
+l8: send 4b to 182 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5242000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 10010000
+l11 requires l9
+}
+
+rank 55 {
+/* Reduce begin */
+l1: send 1800b to 23 tag 1000000
+l2: recv 1800b from 119 tag 1000000
+l1 requires l2
+l3: recv 1800b from 183 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 672545000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 23 tag 1000001
+l7: send 4b to 119 tag 1000001
+l7 requires l6
+l8: send 4b to 183 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5342000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 11532000
+l11 requires l9
+}
+
+rank 56 {
+/* Reduce begin */
+l1: send 1800b to 24 tag 1000000
+l2: recv 1800b from 120 tag 1000000
+l1 requires l2
+l3: recv 1800b from 184 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 693629000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 24 tag 1000001
+l7: send 4b to 120 tag 1000001
+l7 requires l6
+l8: send 4b to 184 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 6038000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7790000
+l11 requires l9
+}
+
+rank 57 {
+/* Reduce begin */
+l1: send 1800b to 25 tag 1000000
+l2: recv 1800b from 121 tag 1000000
+l1 requires l2
+l3: recv 1800b from 185 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 601558000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 25 tag 1000001
+l7: send 4b to 121 tag 1000001
+l7 requires l6
+l8: send 4b to 185 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5251000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 8701000
+l11 requires l9
+}
+
+rank 58 {
+/* Reduce begin */
+l1: send 1800b to 26 tag 1000000
+l2: recv 1800b from 122 tag 1000000
+l1 requires l2
+l3: recv 1800b from 186 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 690427000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 26 tag 1000001
+l7: send 4b to 122 tag 1000001
+l7 requires l6
+l8: send 4b to 186 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5322000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7740000
+l11 requires l9
+}
+
+rank 59 {
+/* Reduce begin */
+l1: send 1800b to 27 tag 1000000
+l2: recv 1800b from 123 tag 1000000
+l1 requires l2
+l3: recv 1800b from 187 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 609560000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 27 tag 1000001
+l7: send 4b to 123 tag 1000001
+l7 requires l6
+l8: send 4b to 187 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5555000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 8034000
+l11 requires l9
+}
+
+rank 60 {
+/* Reduce begin */
+l1: send 1800b to 28 tag 1000000
+l2: recv 1800b from 124 tag 1000000
+l1 requires l2
+l3: recv 1800b from 188 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 549787000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 28 tag 1000001
+l7: send 4b to 124 tag 1000001
+l7 requires l6
+l8: send 4b to 188 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 5119000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 6507000
+l11 requires l9
+}
+
+rank 61 {
+/* Reduce begin */
+l1: send 1800b to 29 tag 1000000
+l2: recv 1800b from 125 tag 1000000
+l1 requires l2
+l3: recv 1800b from 189 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 725074000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 29 tag 1000001
+l7: send 4b to 125 tag 1000001
+l7 requires l6
+l8: send 4b to 189 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4604000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 11939000
+l11 requires l9
+}
+
+rank 62 {
+/* Reduce begin */
+l1: send 1800b to 30 tag 1000000
+l2: recv 1800b from 126 tag 1000000
+l1 requires l2
+l3: recv 1800b from 190 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 582494000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 30 tag 1000001
+l7: send 4b to 126 tag 1000001
+l7 requires l6
+l8: send 4b to 190 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4753000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 7097000
+l11 requires l9
+}
+
+rank 63 {
+/* Reduce begin */
+l1: send 1800b to 31 tag 1000000
+l2: recv 1800b from 127 tag 1000000
+l1 requires l2
+l3: recv 1800b from 191 tag 1000000
+l1 requires l3
+l4: calc 0
+l4 requires l1
+l5: calc 695955000
+l2 requires l5
+l3 requires l5
+/* Reduce end */
+/* Bcast begin */
+l6: recv 4b from 31 tag 1000001
+l7: send 4b to 127 tag 1000001
+l7 requires l6
+l8: send 4b to 191 tag 1000001
+l8 requires l6
+l9: calc 0
+l9 requires l7
+l9 requires l8
+l10: calc 4997000
+l6 requires l10
+l10 requires l4
+/* Bcast end */
+l11: calc 8941000
+l11 requires l9
+}
+
+rank 64 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: recv 1800b from 192 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 474034000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 0 tag 1000001
+l6: send 4b to 192 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 6638000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5569000
+l9 requires l7
+}
+
+rank 65 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: recv 1800b from 193 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 621794000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 1 tag 1000001
+l6: send 4b to 193 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4790000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6102000
+l9 requires l7
+}
+
+rank 66 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: recv 1800b from 194 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 763734000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 2 tag 1000001
+l6: send 4b to 194 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5274000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6573000
+l9 requires l7
+}
+
+rank 67 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: recv 1800b from 195 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 545572000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 3 tag 1000001
+l6: send 4b to 195 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5399000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 10534000
+l9 requires l7
+}
+
+rank 68 {
+/* Reduce begin */
+l1: send 1800b to 4 tag 1000000
+l2: recv 1800b from 196 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 594253000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 4 tag 1000001
+l6: send 4b to 196 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5020000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5327000
+l9 requires l7
+}
+
+rank 69 {
+/* Reduce begin */
+l1: send 1800b to 5 tag 1000000
+l2: recv 1800b from 197 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 471694000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 5 tag 1000001
+l6: send 4b to 197 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4973000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 11832000
+l9 requires l7
+}
+
+rank 70 {
+/* Reduce begin */
+l1: send 1800b to 6 tag 1000000
+l2: recv 1800b from 198 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 583573000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 6 tag 1000001
+l6: send 4b to 198 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5823000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6136000
+l9 requires l7
+}
+
+rank 71 {
+/* Reduce begin */
+l1: send 1800b to 7 tag 1000000
+l2: recv 1800b from 199 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 614407000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 7 tag 1000001
+l6: send 4b to 199 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5833000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 10083000
+l9 requires l7
+}
+
+rank 72 {
+/* Reduce begin */
+l1: send 1800b to 8 tag 1000000
+l2: recv 1800b from 200 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 740144000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 8 tag 1000001
+l6: send 4b to 200 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5730000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5791000
+l9 requires l7
+}
+
+rank 73 {
+/* Reduce begin */
+l1: send 1800b to 9 tag 1000000
+l2: recv 1800b from 201 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 750413000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 9 tag 1000001
+l6: send 4b to 201 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5532000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 14038000
+l9 requires l7
+}
+
+rank 74 {
+/* Reduce begin */
+l1: send 1800b to 10 tag 1000000
+l2: recv 1800b from 202 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 905212000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 10 tag 1000001
+l6: send 4b to 202 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5153000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5637000
+l9 requires l7
+}
+
+rank 75 {
+/* Reduce begin */
+l1: send 1800b to 11 tag 1000000
+l2: recv 1800b from 203 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 569573000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 11 tag 1000001
+l6: send 4b to 203 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5414000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 12441000
+l9 requires l7
+}
+
+rank 76 {
+/* Reduce begin */
+l1: send 1800b to 12 tag 1000000
+l2: recv 1800b from 204 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 585859000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 12 tag 1000001
+l6: send 4b to 204 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5512000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 4952000
+l9 requires l7
+}
+
+rank 77 {
+/* Reduce begin */
+l1: send 1800b to 13 tag 1000000
+l2: recv 1800b from 205 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 751650000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 13 tag 1000001
+l6: send 4b to 205 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4918000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6291000
+l9 requires l7
+}
+
+rank 78 {
+/* Reduce begin */
+l1: send 1800b to 14 tag 1000000
+l2: recv 1800b from 206 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 793552000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 14 tag 1000001
+l6: send 4b to 206 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5152000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5752000
+l9 requires l7
+}
+
+rank 79 {
+/* Reduce begin */
+l1: send 1800b to 15 tag 1000000
+l2: recv 1800b from 207 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 552120000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 15 tag 1000001
+l6: send 4b to 207 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5192000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 8758000
+l9 requires l7
+}
+
+rank 80 {
+/* Reduce begin */
+l1: send 1800b to 16 tag 1000000
+l2: recv 1800b from 208 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 504427000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 16 tag 1000001
+l6: send 4b to 208 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 11577000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6617000
+l9 requires l7
+}
+
+rank 81 {
+/* Reduce begin */
+l1: send 1800b to 17 tag 1000000
+l2: recv 1800b from 209 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 422481000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 17 tag 1000001
+l6: send 4b to 209 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4963000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 18177000
+l9 requires l7
+}
+
+rank 82 {
+/* Reduce begin */
+l1: send 1800b to 18 tag 1000000
+l2: recv 1800b from 210 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 587249000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 18 tag 1000001
+l6: send 4b to 210 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5454000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5990000
+l9 requires l7
+}
+
+rank 83 {
+/* Reduce begin */
+l1: send 1800b to 19 tag 1000000
+l2: recv 1800b from 211 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 684818000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 19 tag 1000001
+l6: send 4b to 211 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5191000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 22155000
+l9 requires l7
+}
+
+rank 84 {
+/* Reduce begin */
+l1: send 1800b to 20 tag 1000000
+l2: recv 1800b from 212 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 577218000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 20 tag 1000001
+l6: send 4b to 212 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5706000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 12338000
+l9 requires l7
+}
+
+rank 85 {
+/* Reduce begin */
+l1: send 1800b to 21 tag 1000000
+l2: recv 1800b from 213 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 713049000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 21 tag 1000001
+l6: send 4b to 213 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5007000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 23833000
+l9 requires l7
+}
+
+rank 86 {
+/* Reduce begin */
+l1: send 1800b to 22 tag 1000000
+l2: recv 1800b from 214 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 687225000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 22 tag 1000001
+l6: send 4b to 214 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5626000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 12227000
+l9 requires l7
+}
+
+rank 87 {
+/* Reduce begin */
+l1: send 1800b to 23 tag 1000000
+l2: recv 1800b from 215 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 627965000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 23 tag 1000001
+l6: send 4b to 215 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5524000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 24746000
+l9 requires l7
+}
+
+rank 88 {
+/* Reduce begin */
+l1: send 1800b to 24 tag 1000000
+l2: recv 1800b from 216 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 715095000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 24 tag 1000001
+l6: send 4b to 216 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5694000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 17446000
+l9 requires l7
+}
+
+rank 89 {
+/* Reduce begin */
+l1: send 1800b to 25 tag 1000000
+l2: recv 1800b from 217 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 665703000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 25 tag 1000001
+l6: send 4b to 217 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5159000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 29010000
+l9 requires l7
+}
+
+rank 90 {
+/* Reduce begin */
+l1: send 1800b to 26 tag 1000000
+l2: recv 1800b from 218 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 637104000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 26 tag 1000001
+l6: send 4b to 218 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5898000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 32285000
+l9 requires l7
+}
+
+rank 91 {
+/* Reduce begin */
+l1: send 1800b to 27 tag 1000000
+l2: recv 1800b from 219 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 633120000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 27 tag 1000001
+l6: send 4b to 219 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 6037000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 15840000
+l9 requires l7
+}
+
+rank 92 {
+/* Reduce begin */
+l1: send 1800b to 28 tag 1000000
+l2: recv 1800b from 220 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 741341000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 28 tag 1000001
+l6: send 4b to 220 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5129000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 28294000
+l9 requires l7
+}
+
+rank 93 {
+/* Reduce begin */
+l1: send 1800b to 29 tag 1000000
+l2: recv 1800b from 221 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 666347000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 29 tag 1000001
+l6: send 4b to 221 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5124000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 26301000
+l9 requires l7
+}
+
+rank 94 {
+/* Reduce begin */
+l1: send 1800b to 30 tag 1000000
+l2: recv 1800b from 222 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 593230000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 30 tag 1000001
+l6: send 4b to 222 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4612000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 27506000
+l9 requires l7
+}
+
+rank 95 {
+/* Reduce begin */
+l1: send 1800b to 31 tag 1000000
+l2: recv 1800b from 223 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 969824000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 31 tag 1000001
+l6: send 4b to 223 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5139000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7076000
+l9 requires l7
+}
+
+rank 96 {
+/* Reduce begin */
+l1: send 1800b to 32 tag 1000000
+l2: recv 1800b from 224 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 563605000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 32 tag 1000001
+l6: send 4b to 224 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 6658000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5452000
+l9 requires l7
+}
+
+rank 97 {
+/* Reduce begin */
+l1: send 1800b to 33 tag 1000000
+l2: recv 1800b from 225 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 611162000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 33 tag 1000001
+l6: send 4b to 225 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5193000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6336000
+l9 requires l7
+}
+
+rank 98 {
+/* Reduce begin */
+l1: send 1800b to 34 tag 1000000
+l2: recv 1800b from 226 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 503565000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 34 tag 1000001
+l6: send 4b to 226 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5193000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6392000
+l9 requires l7
+}
+
+rank 99 {
+/* Reduce begin */
+l1: send 1800b to 35 tag 1000000
+l2: recv 1800b from 227 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 557502000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 35 tag 1000001
+l6: send 4b to 227 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5524000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6224000
+l9 requires l7
+}
+
+rank 100 {
+/* Reduce begin */
+l1: send 1800b to 36 tag 1000000
+l2: recv 1800b from 228 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 639062000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 36 tag 1000001
+l6: send 4b to 228 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5594000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6533000
+l9 requires l7
+}
+
+rank 101 {
+/* Reduce begin */
+l1: send 1800b to 37 tag 1000000
+l2: recv 1800b from 229 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 554196000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 37 tag 1000001
+l6: send 4b to 229 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5060000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 12223000
+l9 requires l7
+}
+
+rank 102 {
+/* Reduce begin */
+l1: send 1800b to 38 tag 1000000
+l2: recv 1800b from 230 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 726520000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 38 tag 1000001
+l6: send 4b to 230 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5472000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5334000
+l9 requires l7
+}
+
+rank 103 {
+/* Reduce begin */
+l1: send 1800b to 39 tag 1000000
+l2: recv 1800b from 231 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 644445000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 39 tag 1000001
+l6: send 4b to 231 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5356000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 9179000
+l9 requires l7
+}
+
+rank 104 {
+/* Reduce begin */
+l1: send 1800b to 40 tag 1000000
+l2: recv 1800b from 232 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 668092000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 40 tag 1000001
+l6: send 4b to 232 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5958000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5577000
+l9 requires l7
+}
+
+rank 105 {
+/* Reduce begin */
+l1: send 1800b to 41 tag 1000000
+l2: recv 1800b from 233 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 654886000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 41 tag 1000001
+l6: send 4b to 233 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5218000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 9206000
+l9 requires l7
+}
+
+rank 106 {
+/* Reduce begin */
+l1: send 1800b to 42 tag 1000000
+l2: recv 1800b from 234 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 527097000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 42 tag 1000001
+l6: send 4b to 234 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5483000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7175000
+l9 requires l7
+}
+
+rank 107 {
+/* Reduce begin */
+l1: send 1800b to 43 tag 1000000
+l2: recv 1800b from 235 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 542669000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 43 tag 1000001
+l6: send 4b to 235 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5517000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5910000
+l9 requires l7
+}
+
+rank 108 {
+/* Reduce begin */
+l1: send 1800b to 44 tag 1000000
+l2: recv 1800b from 236 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 764679000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 44 tag 1000001
+l6: send 4b to 236 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5257000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5636000
+l9 requires l7
+}
+
+rank 109 {
+/* Reduce begin */
+l1: send 1800b to 45 tag 1000000
+l2: recv 1800b from 237 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 570019000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 45 tag 1000001
+l6: send 4b to 237 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4941000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6010000
+l9 requires l7
+}
+
+rank 110 {
+/* Reduce begin */
+l1: send 1800b to 46 tag 1000000
+l2: recv 1800b from 238 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 710807000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 46 tag 1000001
+l6: send 4b to 238 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5103000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 6516000
+l9 requires l7
+}
+
+rank 111 {
+/* Reduce begin */
+l1: send 1800b to 47 tag 1000000
+l2: recv 1800b from 239 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 668904000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 47 tag 1000001
+l6: send 4b to 239 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5257000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 5807000
+l9 requires l7
+}
+
+rank 112 {
+/* Reduce begin */
+l1: send 1800b to 48 tag 1000000
+l2: recv 1800b from 240 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 575153000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 48 tag 1000001
+l6: send 4b to 240 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 10528000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7304000
+l9 requires l7
+}
+
+rank 113 {
+/* Reduce begin */
+l1: send 1800b to 49 tag 1000000
+l2: recv 1800b from 241 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 702707000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 49 tag 1000001
+l6: send 4b to 241 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4880000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 17786000
+l9 requires l7
+}
+
+rank 114 {
+/* Reduce begin */
+l1: send 1800b to 50 tag 1000000
+l2: recv 1800b from 242 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 577473000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 50 tag 1000001
+l6: send 4b to 242 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5044000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7299000
+l9 requires l7
+}
+
+rank 115 {
+/* Reduce begin */
+l1: send 1800b to 51 tag 1000000
+l2: recv 1800b from 243 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 566805000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 51 tag 1000001
+l6: send 4b to 243 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5172000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 9981000
+l9 requires l7
+}
+
+rank 116 {
+/* Reduce begin */
+l1: send 1800b to 52 tag 1000000
+l2: recv 1800b from 244 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 876305000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 52 tag 1000001
+l6: send 4b to 244 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5130000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7261000
+l9 requires l7
+}
+
+rank 117 {
+/* Reduce begin */
+l1: send 1800b to 53 tag 1000000
+l2: recv 1800b from 245 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 595095000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 53 tag 1000001
+l6: send 4b to 245 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4755000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7940000
+l9 requires l7
+}
+
+rank 118 {
+/* Reduce begin */
+l1: send 1800b to 54 tag 1000000
+l2: recv 1800b from 246 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 570657000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 54 tag 1000001
+l6: send 4b to 246 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5587000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 8920000
+l9 requires l7
+}
+
+rank 119 {
+/* Reduce begin */
+l1: send 1800b to 55 tag 1000000
+l2: recv 1800b from 247 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 514196000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 55 tag 1000001
+l6: send 4b to 247 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5318000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 14894000
+l9 requires l7
+}
+
+rank 120 {
+/* Reduce begin */
+l1: send 1800b to 56 tag 1000000
+l2: recv 1800b from 248 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 651208000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 56 tag 1000001
+l6: send 4b to 248 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5906000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 9238000
+l9 requires l7
+}
+
+rank 121 {
+/* Reduce begin */
+l1: send 1800b to 57 tag 1000000
+l2: recv 1800b from 249 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 619543000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 57 tag 1000001
+l6: send 4b to 249 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5118000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 10897000
+l9 requires l7
+}
+
+rank 122 {
+/* Reduce begin */
+l1: send 1800b to 58 tag 1000000
+l2: recv 1800b from 250 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 649404000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 58 tag 1000001
+l6: send 4b to 250 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5452000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 8840000
+l9 requires l7
+}
+
+rank 123 {
+/* Reduce begin */
+l1: send 1800b to 59 tag 1000000
+l2: recv 1800b from 251 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 616945000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 59 tag 1000001
+l6: send 4b to 251 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5459000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 13814000
+l9 requires l7
+}
+
+rank 124 {
+/* Reduce begin */
+l1: send 1800b to 60 tag 1000000
+l2: recv 1800b from 252 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 626477000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 60 tag 1000001
+l6: send 4b to 252 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5070000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 7497000
+l9 requires l7
+}
+
+rank 125 {
+/* Reduce begin */
+l1: send 1800b to 61 tag 1000000
+l2: recv 1800b from 253 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 603384000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 61 tag 1000001
+l6: send 4b to 253 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4439000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 8835000
+l9 requires l7
+}
+
+rank 126 {
+/* Reduce begin */
+l1: send 1800b to 62 tag 1000000
+l2: recv 1800b from 254 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 568214000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 62 tag 1000001
+l6: send 4b to 254 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 4845000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 17210000
+l9 requires l7
+}
+
+rank 127 {
+/* Reduce begin */
+l1: send 1800b to 63 tag 1000000
+l2: recv 1800b from 255 tag 1000000
+l1 requires l2
+l3: calc 0
+l3 requires l1
+l4: calc 831810000
+l2 requires l4
+/* Reduce end */
+/* Bcast begin */
+l5: recv 4b from 63 tag 1000001
+l6: send 4b to 255 tag 1000001
+l6 requires l5
+l7: calc 0
+l7 requires l6
+l8: calc 5057000
+l5 requires l8
+l8 requires l3
+/* Bcast end */
+l9: calc 9181000
+l9 requires l7
+}
+
+rank 128 {
+/* Reduce begin */
+l1: send 1800b to 0 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 452505000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 0 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6637000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4283000
+l7 requires l5
+}
+
+rank 129 {
+/* Reduce begin */
+l1: send 1800b to 1 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 490690000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 1 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4717000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6070000
+l7 requires l5
+}
+
+rank 130 {
+/* Reduce begin */
+l1: send 1800b to 2 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 545219000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 2 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5232000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5377000
+l7 requires l5
+}
+
+rank 131 {
+/* Reduce begin */
+l1: send 1800b to 3 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 573737000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 3 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4871000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6836000
+l7 requires l5
+}
+
+rank 132 {
+/* Reduce begin */
+l1: send 1800b to 4 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 540112000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 4 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5513000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6735000
+l7 requires l5
+}
+
+rank 133 {
+/* Reduce begin */
+l1: send 1800b to 5 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 492102000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 5 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4931000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 13306000
+l7 requires l5
+}
+
+rank 134 {
+/* Reduce begin */
+l1: send 1800b to 6 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 536963000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 6 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5314000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17462000
+l7 requires l5
+}
+
+rank 135 {
+/* Reduce begin */
+l1: send 1800b to 7 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 661812000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 7 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5821000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 12692000
+l7 requires l5
+}
+
+rank 136 {
+/* Reduce begin */
+l1: send 1800b to 8 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 684737000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 8 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6039000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5910000
+l7 requires l5
+}
+
+rank 137 {
+/* Reduce begin */
+l1: send 1800b to 9 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 612031000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 9 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5485000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 16773000
+l7 requires l5
+}
+
+rank 138 {
+/* Reduce begin */
+l1: send 1800b to 10 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 678814000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 10 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6013000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4737000
+l7 requires l5
+}
+
+rank 139 {
+/* Reduce begin */
+l1: send 1800b to 11 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 588522000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 11 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5312000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 10853000
+l7 requires l5
+}
+
+rank 140 {
+/* Reduce begin */
+l1: send 1800b to 12 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 575927000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 12 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5209000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5895000
+l7 requires l5
+}
+
+rank 141 {
+/* Reduce begin */
+l1: send 1800b to 13 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 918595000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 13 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4724000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11480000
+l7 requires l5
+}
+
+rank 142 {
+/* Reduce begin */
+l1: send 1800b to 14 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 682868000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 14 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4722000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7124000
+l7 requires l5
+}
+
+rank 143 {
+/* Reduce begin */
+l1: send 1800b to 15 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 647369000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 15 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4857000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 13564000
+l7 requires l5
+}
+
+rank 144 {
+/* Reduce begin */
+l1: send 1800b to 16 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 482313000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 16 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 11971000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7234000
+l7 requires l5
+}
+
+rank 145 {
+/* Reduce begin */
+l1: send 1800b to 17 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 756575000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 17 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4911000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5877000
+l7 requires l5
+}
+
+rank 146 {
+/* Reduce begin */
+l1: send 1800b to 18 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 794649000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 18 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4900000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17102000
+l7 requires l5
+}
+
+rank 147 {
+/* Reduce begin */
+l1: send 1800b to 19 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 695905000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 19 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5247000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6554000
+l7 requires l5
+}
+
+rank 148 {
+/* Reduce begin */
+l1: send 1800b to 20 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 663720000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 20 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5517000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5382000
+l7 requires l5
+}
+
+rank 149 {
+/* Reduce begin */
+l1: send 1800b to 21 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 523900000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 21 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4758000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 9875000
+l7 requires l5
+}
+
+rank 150 {
+/* Reduce begin */
+l1: send 1800b to 22 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 545737000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 22 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5727000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6490000
+l7 requires l5
+}
+
+rank 151 {
+/* Reduce begin */
+l1: send 1800b to 23 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 629850000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 23 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5113000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11514000
+l7 requires l5
+}
+
+rank 152 {
+/* Reduce begin */
+l1: send 1800b to 24 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 569818000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 24 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5697000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5692000
+l7 requires l5
+}
+
+rank 153 {
+/* Reduce begin */
+l1: send 1800b to 25 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 493873000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 25 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5198000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7938000
+l7 requires l5
+}
+
+rank 154 {
+/* Reduce begin */
+l1: send 1800b to 26 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 605604000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 26 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5135000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17328000
+l7 requires l5
+}
+
+rank 155 {
+/* Reduce begin */
+l1: send 1800b to 27 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 748175000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 27 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5277000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 15998000
+l7 requires l5
+}
+
+rank 156 {
+/* Reduce begin */
+l1: send 1800b to 28 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 1135405797000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 28 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5548000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5770000
+l7 requires l5
+}
+
+rank 157 {
+/* Reduce begin */
+l1: send 1800b to 29 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 1943799673000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 29 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4884000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6683000
+l7 requires l5
+}
+
+rank 158 {
+/* Reduce begin */
+l1: send 1800b to 30 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 2593610947000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 30 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4931000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6024000
+l7 requires l5
+}
+
+rank 159 {
+/* Reduce begin */
+l1: send 1800b to 31 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3137584763000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 31 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5102000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 12393000
+l7 requires l5
+}
+
+rank 160 {
+/* Reduce begin */
+l1: send 1800b to 32 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3608646739000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 32 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 7359000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4957000
+l7 requires l5
+}
+
+rank 161 {
+/* Reduce begin */
+l1: send 1800b to 33 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3980530056000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 33 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5156000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6148000
+l7 requires l5
+}
+
+rank 162 {
+/* Reduce begin */
+l1: send 1800b to 34 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4306177397000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 34 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5308000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4972000
+l7 requires l5
+}
+
+rank 163 {
+/* Reduce begin */
+l1: send 1800b to 35 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4581370194000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 35 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5869000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6118000
+l7 requires l5
+}
+
+rank 164 {
+/* Reduce begin */
+l1: send 1800b to 36 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4808832262000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 36 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5669000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5847000
+l7 requires l5
+}
+
+rank 165 {
+/* Reduce begin */
+l1: send 1800b to 37 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5003076889000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 37 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5265000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17180000
+l7 requires l5
+}
+
+rank 166 {
+/* Reduce begin */
+l1: send 1800b to 38 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5175094597000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 38 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5690000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6082000
+l7 requires l5
+}
+
+rank 167 {
+/* Reduce begin */
+l1: send 1800b to 39 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5302091832000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 39 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5819000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6667000
+l7 requires l5
+}
+
+rank 168 {
+/* Reduce begin */
+l1: send 1800b to 40 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5427233274000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 40 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5896000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 15028000
+l7 requires l5
+}
+
+rank 169 {
+/* Reduce begin */
+l1: send 1800b to 41 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5514723529000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 41 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5243000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6521000
+l7 requires l5
+}
+
+rank 170 {
+/* Reduce begin */
+l1: send 1800b to 42 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5605991308000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 42 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5580000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 13853000
+l7 requires l5
+}
+
+rank 171 {
+/* Reduce begin */
+l1: send 1800b to 43 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5677800736000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 43 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5798000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 14484000
+l7 requires l5
+}
+
+rank 172 {
+/* Reduce begin */
+l1: send 1800b to 44 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5731419510000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 44 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5555000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11039000
+l7 requires l5
+}
+
+rank 173 {
+/* Reduce begin */
+l1: send 1800b to 45 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5777943414000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 45 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 4957000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11863000
+l7 requires l5
+}
+
+rank 174 {
+/* Reduce begin */
+l1: send 1800b to 46 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5815406046000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 46 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5294000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5928000
+l7 requires l5
+}
+
+rank 175 {
+/* Reduce begin */
+l1: send 1800b to 47 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5855228747000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 47 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5301000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11983000
+l7 requires l5
+}
+
+rank 176 {
+/* Reduce begin */
+l1: send 1800b to 48 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5914590084000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 48 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 11934000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6368000
+l7 requires l5
+}
+
+rank 177 {
+/* Reduce begin */
+l1: send 1800b to 49 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5904651820000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 49 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5738000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6641000
+l7 requires l5
+}
+
+rank 178 {
+/* Reduce begin */
+l1: send 1800b to 50 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5925942902000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 50 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5450000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5733000
+l7 requires l5
+}
+
+rank 179 {
+/* Reduce begin */
+l1: send 1800b to 51 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5939156586000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 51 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5494000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6400000
+l7 requires l5
+}
+
+rank 180 {
+/* Reduce begin */
+l1: send 1800b to 52 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5953324122000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 52 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6024000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5713000
+l7 requires l5
+}
+
+rank 181 {
+/* Reduce begin */
+l1: send 1800b to 53 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5963511616000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 53 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5223000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7716000
+l7 requires l5
+}
+
+rank 182 {
+/* Reduce begin */
+l1: send 1800b to 54 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5967073876000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 54 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5753000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6977000
+l7 requires l5
+}
+
+rank 183 {
+/* Reduce begin */
+l1: send 1800b to 55 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5992680912000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 55 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5966000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8697000
+l7 requires l5
+}
+
+rank 184 {
+/* Reduce begin */
+l1: send 1800b to 56 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5981309948000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 56 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5759000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5820000
+l7 requires l5
+}
+
+rank 185 {
+/* Reduce begin */
+l1: send 1800b to 57 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5993926672000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 57 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5592000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6070000
+l7 requires l5
+}
+
+rank 186 {
+/* Reduce begin */
+l1: send 1800b to 58 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6016233136000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 58 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5784000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7515000
+l7 requires l5
+}
+
+rank 187 {
+/* Reduce begin */
+l1: send 1800b to 59 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6017108064000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 59 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5653000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8335000
+l7 requires l5
+}
+
+rank 188 {
+/* Reduce begin */
+l1: send 1800b to 60 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6018748535000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 60 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5703000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6566000
+l7 requires l5
+}
+
+rank 189 {
+/* Reduce begin */
+l1: send 1800b to 61 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6005960106000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 61 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5485000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6112000
+l7 requires l5
+}
+
+rank 190 {
+/* Reduce begin */
+l1: send 1800b to 62 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6025183129000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 62 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5438000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6762000
+l7 requires l5
+}
+
+rank 191 {
+/* Reduce begin */
+l1: send 1800b to 63 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6027118592000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 63 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5723000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8866000
+l7 requires l5
+}
+
+rank 192 {
+/* Reduce begin */
+l1: send 1800b to 64 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6023810545000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 64 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 7233000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4770000
+l7 requires l5
+}
+
+rank 193 {
+/* Reduce begin */
+l1: send 1800b to 65 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6009851003000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 65 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5544000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4915000
+l7 requires l5
+}
+
+rank 194 {
+/* Reduce begin */
+l1: send 1800b to 66 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6010892488000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 66 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5465000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4691000
+l7 requires l5
+}
+
+rank 195 {
+/* Reduce begin */
+l1: send 1800b to 67 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6011412109000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 67 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5742000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6463000
+l7 requires l5
+}
+
+rank 196 {
+/* Reduce begin */
+l1: send 1800b to 68 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6013119689000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 68 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5823000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4166000
+l7 requires l5
+}
+
+rank 197 {
+/* Reduce begin */
+l1: send 1800b to 69 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6012407510000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 69 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5391000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5038000
+l7 requires l5
+}
+
+rank 198 {
+/* Reduce begin */
+l1: send 1800b to 70 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6012090987000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 70 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5695000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 14406000
+l7 requires l5
+}
+
+rank 199 {
+/* Reduce begin */
+l1: send 1800b to 71 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6028157020000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 71 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5761000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5982000
+l7 requires l5
+}
+
+rank 200 {
+/* Reduce begin */
+l1: send 1800b to 72 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6029202595000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 72 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5794000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4576000
+l7 requires l5
+}
+
+rank 201 {
+/* Reduce begin */
+l1: send 1800b to 73 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6031651195000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 73 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5748000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11691000
+l7 requires l5
+}
+
+rank 202 {
+/* Reduce begin */
+l1: send 1800b to 74 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6030909157000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 74 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5331000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6617000
+l7 requires l5
+}
+
+rank 203 {
+/* Reduce begin */
+l1: send 1800b to 75 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6013942896000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 75 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5925000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 12305000
+l7 requires l5
+}
+
+rank 204 {
+/* Reduce begin */
+l1: send 1800b to 76 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6032116213000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 76 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6111000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11897000
+l7 requires l5
+}
+
+rank 205 {
+/* Reduce begin */
+l1: send 1800b to 77 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6013258639000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 77 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5394000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6313000
+l7 requires l5
+}
+
+rank 206 {
+/* Reduce begin */
+l1: send 1800b to 78 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6031975620000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 78 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5698000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5451000
+l7 requires l5
+}
+
+rank 207 {
+/* Reduce begin */
+l1: send 1800b to 79 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6014235839000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 79 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5605000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 9130000
+l7 requires l5
+}
+
+rank 208 {
+/* Reduce begin */
+l1: send 1800b to 80 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6050806527000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 80 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 13525000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6937000
+l7 requires l5
+}
+
+rank 209 {
+/* Reduce begin */
+l1: send 1800b to 81 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6024144791000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 81 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5353000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7976000
+l7 requires l5
+}
+
+rank 210 {
+/* Reduce begin */
+l1: send 1800b to 82 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6014523422000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 82 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5660000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6722000
+l7 requires l5
+}
+
+rank 211 {
+/* Reduce begin */
+l1: send 1800b to 83 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6016504516000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 83 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5473000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8938000
+l7 requires l5
+}
+
+rank 212 {
+/* Reduce begin */
+l1: send 1800b to 84 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6018685785000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 84 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6665000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17358000
+l7 requires l5
+}
+
+rank 213 {
+/* Reduce begin */
+l1: send 1800b to 85 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6013294622000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 85 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5378000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 11336000
+l7 requires l5
+}
+
+rank 214 {
+/* Reduce begin */
+l1: send 1800b to 86 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6011704979000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 86 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5525000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7983000
+l7 requires l5
+}
+
+rank 215 {
+/* Reduce begin */
+l1: send 1800b to 87 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6024015963000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 87 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5561000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8302000
+l7 requires l5
+}
+
+rank 216 {
+/* Reduce begin */
+l1: send 1800b to 88 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6026347431000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 88 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5821000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7182000
+l7 requires l5
+}
+
+rank 217 {
+/* Reduce begin */
+l1: send 1800b to 89 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6015214828000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 89 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5551000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8360000
+l7 requires l5
+}
+
+rank 218 {
+/* Reduce begin */
+l1: send 1800b to 90 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6026276241000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 90 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5533000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 21856000
+l7 requires l5
+}
+
+rank 219 {
+/* Reduce begin */
+l1: send 1800b to 91 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6031279944000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 91 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5573000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 15335000
+l7 requires l5
+}
+
+rank 220 {
+/* Reduce begin */
+l1: send 1800b to 92 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6011539609000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 92 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5873000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17965000
+l7 requires l5
+}
+
+rank 221 {
+/* Reduce begin */
+l1: send 1800b to 93 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6023494048000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 93 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5729000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 16952000
+l7 requires l5
+}
+
+rank 222 {
+/* Reduce begin */
+l1: send 1800b to 94 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6021855368000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 94 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5937000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 20268000
+l7 requires l5
+}
+
+rank 223 {
+/* Reduce begin */
+l1: send 1800b to 95 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6017219398000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 95 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5680000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 16967000
+l7 requires l5
+}
+
+rank 224 {
+/* Reduce begin */
+l1: send 1800b to 96 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6009322453000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 96 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 7400000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6974000
+l7 requires l5
+}
+
+rank 225 {
+/* Reduce begin */
+l1: send 1800b to 97 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 6002473167000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 97 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5573000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 18711000
+l7 requires l5
+}
+
+rank 226 {
+/* Reduce begin */
+l1: send 1800b to 98 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5992072129000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 98 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5584000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5788000
+l7 requires l5
+}
+
+rank 227 {
+/* Reduce begin */
+l1: send 1800b to 99 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5976082398000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 99 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5660000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7385000
+l7 requires l5
+}
+
+rank 228 {
+/* Reduce begin */
+l1: send 1800b to 100 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5978675506000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 100 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6009000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6740000
+l7 requires l5
+}
+
+rank 229 {
+/* Reduce begin */
+l1: send 1800b to 101 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5960808253000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 101 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5451000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 19749000
+l7 requires l5
+}
+
+rank 230 {
+/* Reduce begin */
+l1: send 1800b to 102 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5976680631000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 102 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5488000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 5546000
+l7 requires l5
+}
+
+rank 231 {
+/* Reduce begin */
+l1: send 1800b to 103 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5967019689000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 103 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5760000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 24516000
+l7 requires l5
+}
+
+rank 232 {
+/* Reduce begin */
+l1: send 1800b to 104 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5950689048000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 104 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5814000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 26660000
+l7 requires l5
+}
+
+rank 233 {
+/* Reduce begin */
+l1: send 1800b to 105 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5917450932000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 105 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6708000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 24300000
+l7 requires l5
+}
+
+rank 234 {
+/* Reduce begin */
+l1: send 1800b to 106 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5897781543000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 106 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5671000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 28507000
+l7 requires l5
+}
+
+rank 235 {
+/* Reduce begin */
+l1: send 1800b to 107 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5885581499000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 107 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5490000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7583000
+l7 requires l5
+}
+
+rank 236 {
+/* Reduce begin */
+l1: send 1800b to 108 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5848492276000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 108 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 6227000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 4897000
+l7 requires l5
+}
+
+rank 237 {
+/* Reduce begin */
+l1: send 1800b to 109 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5824884277000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 109 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5379000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 23400000
+l7 requires l5
+}
+
+rank 238 {
+/* Reduce begin */
+l1: send 1800b to 110 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5784103904000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 110 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5663000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 12996000
+l7 requires l5
+}
+
+rank 239 {
+/* Reduce begin */
+l1: send 1800b to 111 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5733395887000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 111 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5524000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 18178000
+l7 requires l5
+}
+
+rank 240 {
+/* Reduce begin */
+l1: send 1800b to 112 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5683559387000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 112 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 13820000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7374000
+l7 requires l5
+}
+
+rank 241 {
+/* Reduce begin */
+l1: send 1800b to 113 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5596402753000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 113 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5788000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7514000
+l7 requires l5
+}
+
+rank 242 {
+/* Reduce begin */
+l1: send 1800b to 114 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5522019259000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 114 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5628000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7930000
+l7 requires l5
+}
+
+rank 243 {
+/* Reduce begin */
+l1: send 1800b to 115 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5415162930000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 115 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5736000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8979000
+l7 requires l5
+}
+
+rank 244 {
+/* Reduce begin */
+l1: send 1800b to 116 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5308687916000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 116 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5760000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7292000
+l7 requires l5
+}
+
+rank 245 {
+/* Reduce begin */
+l1: send 1800b to 117 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5166040683000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 117 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5555000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7892000
+l7 requires l5
+}
+
+rank 246 {
+/* Reduce begin */
+l1: send 1800b to 118 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 5002854869000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 118 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 10522000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8708000
+l7 requires l5
+}
+
+rank 247 {
+/* Reduce begin */
+l1: send 1800b to 119 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4815921787000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 119 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5830000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 14242000
+l7 requires l5
+}
+
+rank 248 {
+/* Reduce begin */
+l1: send 1800b to 120 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4594060430000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 120 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5700000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 7193000
+l7 requires l5
+}
+
+rank 249 {
+/* Reduce begin */
+l1: send 1800b to 121 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 4321873567000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 121 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5337000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 13838000
+l7 requires l5
+}
+
+rank 250 {
+/* Reduce begin */
+l1: send 1800b to 122 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3999979514000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 122 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5505000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6383000
+l7 requires l5
+}
+
+rank 251 {
+/* Reduce begin */
+l1: send 1800b to 123 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3613773316000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 123 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5905000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 13842000
+l7 requires l5
+}
+
+rank 252 {
+/* Reduce begin */
+l1: send 1800b to 124 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 3143701441000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 124 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5700000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 17338000
+l7 requires l5
+}
+
+rank 253 {
+/* Reduce begin */
+l1: send 1800b to 125 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 2609377737000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 125 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5498000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 15929000
+l7 requires l5
+}
+
+rank 254 {
+/* Reduce begin */
+l1: send 1800b to 126 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 1952450673000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 126 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5401000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 6127000
+l7 requires l5
+}
+
+rank 255 {
+/* Reduce begin */
+l1: send 1800b to 127 tag 1000000
+l2: calc 0
+l2 requires l1
+l3: calc 1141502803000
+l1 requires l3
+/* Reduce end */
+/* Bcast begin */
+l4: recv 4b from 127 tag 1000001
+l5: calc 0
+l5 requires l4
+l6: calc 5457000
+l4 requires l6
+l6 requires l2
+/* Bcast end */
+l7: calc 8424000
+l7 requires l5
+}
