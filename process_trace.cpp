@@ -646,6 +646,11 @@ void process_trace(gengetopt_args_info *args_info) {
             double tstart; match.get(1,&tstart);
             double tend; match.get(4,&tend);
 
+			// if we cannot find the request, i.e., because its a wait on a
+			// MPI_REQUEST_NULL, don't do anything
+			
+			if (reqs.find(req) != reqs.end()) {
+
             //std::cout << line << std::endl;
             if(print) std::cout <<  " wait " << " time " << tend-tstart<<  " req: " << req << std::endl;
             if(print) goal.Comment("wait");
@@ -655,15 +660,17 @@ void process_trace(gengetopt_args_info *args_info) {
               //curlocop.prev.push_back(std::make_pair(req_id,LocOp::REQU));
               goal.Requires(id, req_id); 
             } catch (std::out_of_range) {
-              std::cerr << "request " << req << " not found - there is something wrong with the trace!" << std::endl;
-              return;
+// MPI_Wait will just set the handle to MPI_REQUEST_NULL, its perfectly legal to
+// call again, actually liballprof does not have sufficient info in this case
+//              std::cerr << "request " << req << " not found - there is something wrong with the trace!" << std::endl;
+//              return;
             }
             reqs.erase(req);
             
             curlocop.next = make_vector(std::make_pair(id,LocOp::REQU));
             curlocop.NextOp(tstart, tend);
             curlocop.prev = make_vector(std::make_pair(id,LocOp::REQU));
-
+            }
             goto endloop;
           }
 
@@ -680,11 +687,16 @@ void process_trace(gengetopt_args_info *args_info) {
             Goal::t_id id = goal.Exec("waitall", 0);
             try {
               for(unsigned long i=req; i<req+nreq*req_size;i+=req_size) {
-                if(print) std::cout <<  " resolving req " << i << std::endl;
-                Goal::t_id req_id = reqs.at(i);
-                goal.Requires(id, req_id); 
+			    if (reqs.find(req) != reqs.end()) {
+                  if(print) std::cout <<  " resolving req " << i << std::endl;
+                  Goal::t_id req_id = reqs.at(i);
+                  goal.Requires(id, req_id);
+				}
               }
             } catch (std::out_of_range) {
+			  // this is bs, doing to MPI_Waits on the same req handle will lead
+			  // to an error in schedgen, but is perfectly legal, since the first
+			  // wait will turn the request into an req_null
               std::cerr << "request " << req << " not found - there is something wrong with the trace! (try adjusting req_size = " << req_size << ")" << std::endl;
               return;
             }
