@@ -515,12 +515,13 @@ void process_trace(gengetopt_args_info *args_info) {
             int count; match.get(3,&count);
             int tag; match.get(8,&tag);
             int dest; match.get(7,&dest);
+			int comm; match.get(9, &comm);
             double tend; match.get(13,&tend);
 
             if(print) std::cout <<  " recv from " << dest << " time: " << tend-tstart <<  " size: "<< size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Recv begin");
-            goal.SetTag(tag);
+            goal.SetTag(((uint64_t) comm) << 32 | tag);
             if(dest != -1 /* MPI_ANY_SOURCE */) dest += hosts*extrhost;
             Goal::t_id id = goal.Recv(size*count, dest);
             if(print) goal.Comment("Recv end");
@@ -541,13 +542,14 @@ void process_trace(gengetopt_args_info *args_info) {
             int count; match.get(3,&count);
             int tag; match.get(8,&tag);
             int dest; match.get(7,&dest);
+			int comm; match.get(9, &comm);
             unsigned long req; match.get(12,&req);
             double tend; match.get(13,&tend);
 
             if(print) std::cout <<  " irecv from " << dest << " time: " << tend-tstart <<  " size: "<< size*count << " tag: " << tag << " req " << req << std::endl;
             
             if(print) goal.Comment("Irecv begin");
-            goal.SetTag(tag);
+            goal.SetTag(((uint64_t) comm) << 32 | tag);
             if(dest != -1 /* MPI_ANY_SOURCE */) dest += hosts*extrhost;
             Goal::t_id id = goal.Recv(size*count, dest);
             reqs[req] = id;
@@ -570,11 +572,12 @@ void process_trace(gengetopt_args_info *args_info) {
             int tag; match.get(8,&tag);
             int dest; match.get(7,&dest);
             double tend; match.get(12,&tend);
+			int comm; match.get(9, &comm);
 
             if(print) std::cout <<  " send to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Send begin");
-            goal.SetTag(tag);
+            goal.SetTag(((uint64_t) comm) << 32 | tag);
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             if(print) goal.Comment("Send end");
 
@@ -595,11 +598,12 @@ void process_trace(gengetopt_args_info *args_info) {
             int tag; match.get(8,&tag);
             int dest; match.get(7,&dest);
             double tend; match.get(12,&tend);
+			int comm; match.get(9, &comm);
 
             if(print) std::cout <<  " rsend to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Rsend begin");
-            goal.SetTag(tag);
+            goal.SetTag(((uint64_t) comm) << 32 | tag);
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             if(print) goal.Comment("Rsend end");
 
@@ -618,6 +622,7 @@ void process_trace(gengetopt_args_info *args_info) {
             int size; match.get(5,&size);
             int count; match.get(3,&count);
             int tag; match.get(8,&tag);
+			int comm; match.get(9, &comm);
             int dest; match.get(7,&dest);
             unsigned long req; match.get(12,&req);
             double tend; match.get(13,&tend);
@@ -625,7 +630,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " isend to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << " req " << req << std::endl;
             
             if(print) goal.Comment("Isend begin");
-            goal.SetTag(tag);
+            goal.SetTag(((uint64_t) comm << 32) | tag);
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             reqs[req] = id;
             if(print) goal.Comment("Isend end");
@@ -687,7 +692,7 @@ void process_trace(gengetopt_args_info *args_info) {
             Goal::t_id id = goal.Exec("waitall", 0);
             try {
               for(unsigned long i=req; i<req+nreq*req_size;i+=req_size) {
-			    if (reqs.find(req) != reqs.end()) {
+			    if (reqs.find(i) != reqs.end()) {
                   if(print) std::cout <<  " resolving req " << i << std::endl;
                   Goal::t_id req_id = reqs.at(i);
                   goal.Requires(id, req_id);
@@ -720,14 +725,15 @@ void process_trace(gengetopt_args_info *args_info) {
             int rsize; match.get(12,&rsize);
             int rsource; match.get(14,&rsource);
             int rtag; match.get(15,&rtag);
+            int comm; match.get(16,&comm);
             double tend; match.get(20,&tend);
 
             if(print) std::cout <<  " sendrecv - send to " << sdest << " size: " << ssize*scount << " tag: " << stag << "; recv from " << rsource << " size: " << rsize*rcount << " tag: " << rtag << "; time: " << tend-tstart <<  std::endl;
             
             if(print) goal.Comment("Sendrecv begin");
-            goal.SetTag(stag);
+            goal.SetTag(((uint64_t) comm << 32) | stag);
             Goal::t_id sid = goal.Send(ssize*scount, sdest+hosts*extrhost);
-            goal.SetTag(rtag);
+            goal.SetTag(((uint64_t) comm << 32) | stag);
             Goal::t_id rid = goal.Recv(rsize*rcount, rsource+hosts*extrhost);
             if(print) goal.Comment("Sendrecv end");
 
@@ -793,6 +799,7 @@ void process_trace(gengetopt_args_info *args_info) {
           if(pars.match(&e_barr, funchash, line, &match)) {
             double tstart; match.get(1,&tstart);
             int p; match.get(4,&p);
+            int comm; match.get(2,&comm);
             double tend; match.get(5,&tend);
 
             //std::cout << line << std::endl;
@@ -804,7 +811,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Barrier begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, 1);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -823,6 +830,7 @@ void process_trace(gengetopt_args_info *args_info) {
 		  if(pars.match(&e_allred, funchash, line, &match)) {
             int count; match.get(4,&count);
             int size; match.get(6,&size);
+            int comm; match.get(9,&comm);
             int p; match.get(11,&p);
             double tstart; match.get(1,&tstart);
             double tend; match.get(12,&tend);
@@ -836,7 +844,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Allreduce begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -857,6 +865,7 @@ void process_trace(gengetopt_args_info *args_info) {
             int count; match.get(3,&count);
             int size; match.get(5,&size);
             int root; match.get(7,&root);
+			int comm; match.get(8,&comm);
             int p; match.get(10,&p);
             double tstart; match.get(1,&tstart);
             double tend; match.get(11,&tend);
@@ -869,7 +878,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Bcast begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_binomial_tree_bcast_rank(&goal, root, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -888,6 +897,7 @@ void process_trace(gengetopt_args_info *args_info) {
           if(pars.match(&e_allgather, funchash, line, &match)) {
             int count; match.get(3,&count);
             int size; match.get(5,&size);
+			int comm; match.get(12, &comm);
             int p; match.get(14,&p);
             double tstart; match.get(1,&tstart);
             double tend; match.get(15,&tend);
@@ -900,7 +910,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Allgather begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -926,6 +936,7 @@ void process_trace(gengetopt_args_info *args_info) {
             int count; match.get(4,&count);
             int size; match.get(6,&size);
             int root; match.get(9,&root);
+			int comm; match.get(10,&comm);
             int p; match.get(12,&p);
             double tstart; match.get(1,&tstart);
             double tend; match.get(13,&tend);
@@ -938,7 +949,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Reduce begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_binomial_tree_reduce_rank(&goal, root, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -957,6 +968,7 @@ void process_trace(gengetopt_args_info *args_info) {
           if(pars.match(&e_alltoall, funchash, line, &match)) {
             int count; match.get(3,&count);
             int size; match.get(5,&size);
+			int comm; match.get(12, &comm);
             int p; match.get(14,&p);
             double tstart; match.get(1,&tstart);
             double tend; match.get(15,&tend);
@@ -969,7 +981,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Alltoall begin");
-            goal.SetTag(collsbase+nops);
+            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
             goal.StartOp();
             create_linear_alltoall_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
