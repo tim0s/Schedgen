@@ -63,7 +63,7 @@ class Goal {
       }
       return std::make_pair(rstart,rend);
     }
-    void SetTag(int tag) { curtag=tag; }
+    void SetTag(uint64_t tag) { curtag=tag; }
 		void StartRank(int rank);
 		void Comment(std::string c);
 		int Send(std::vector<buffer_element> buf, int dest);
@@ -93,7 +93,8 @@ class Goal {
 
 		t_id id_counter;
 		int dummynode;
-    int sends, recvs, execs, ranks, reqs, curtag;
+    int sends, recvs, execs, ranks, reqs;
+	uint64_t curtag;
 
 		void read_schedule_from_file();
 
