@@ -507,7 +507,7 @@ void process_trace(gengetopt_args_info *args_info) {
              pars.match(&e_wait, funchash, line, &match) ||
              pars.match(&e_waitall, funchash, line, &match)) goto endloop;
         } else {
-          //MPI_Recv( void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm)
+		  //MPI_Recv( void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status) 
           //MPI_Recv : 1237666053021692.000000 : 11287888 : 4500 : 11,8,8 : 2 : 24000 : 0,0,4 : 140737488340112 : 1237666053022005.000000
           if(pars.match(&e_recv, funchash, line, &match)) {
             double tstart; match.get(1,&tstart);
