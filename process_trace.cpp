@@ -176,6 +176,10 @@ bool htorParser::match(const class htorMatcher *matcher, int hash, char *line, c
   //std::cout << hash << " " << line << "\n";
 
   if(hash == matcher->myhash) {
+	if (strncmp("MPI_", line, 4) != 0) {
+		fprintf(stderr, "line [%s] does not start with MPI_, this might lead to errors\n", line);
+		exit(-1);
+	}
     //std::cout << "matched: ";
     //std::cout << line << "\n";
 
@@ -207,7 +211,7 @@ bool htorParser::match(const class htorMatcher *matcher, int hash, char *line, c
 void LocOp::NextOp(double time, double end) {
 
   time -= this->start;
-  if(time < 0) { std::cerr << "negative operation time" << std::endl; }
+  if(time < 0) { std::cout << "negative operation time (time=" << time << " this->start=" << this->start << " end="<< end<<")" << std::endl; }
 
   if(print) printf(" loclop: %llu\n", (unsigned long long)(round(time*time_mult)));
   int op = this->goal->Exec("comp", (unsigned long long)(round(time*time_mult)), this->cpu);
