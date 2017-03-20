@@ -776,10 +776,10 @@ void process_trace(gengetopt_args_info *args_info) {
           /* TODO: this is a hack to enable the AMG run to work correctly -- 
            * this does only increase nops if it would have increased it
            * with colls enabled !! */
-          if(pars.match(&e_barr, funchash, line, &match) ||
-             pars.match(&e_allred, funchash, line, &match) ||
-             pars.match(&e_bcast, funchash, line, &match) ||
-             pars.match(&e_allgather, funchash, line, &match)) nops++;
+//          if(pars.match(&e_barr, funchash, line, &match) ||
+//             pars.match(&e_allred, funchash, line, &match) ||
+//             pars.match(&e_bcast, funchash, line, &match) ||
+//             pars.match(&e_allgather, funchash, line, &match)) nops++;
 
 
           if(pars.match(&e_barr, funchash, line, &match) ||
