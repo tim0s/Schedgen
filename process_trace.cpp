@@ -15,6 +15,14 @@
 #include <assert.h>
 #include <stdexcept>
 
+int MAKE_TAG(int comm, int tag) {
+	if (comm > 256) fprintf(stderr, "comm too big\n");
+	if (tag > (1 << 23)) fprintf(stderr, "tag too big\n");
+	comm = comm << 24;
+	tag = comm | tag;
+	return tag;
+}
+ 
 
 // TODO: dangerous
 static const int req_size = 4;
@@ -521,7 +529,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " recv from " << dest << " time: " << tend-tstart <<  " size: "<< size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Recv begin");
-            goal.SetTag(((uint64_t) comm) << 32 | tag);
+            goal.SetTag(MAKE_TAG(comm,  tag));
             if(dest != -1 /* MPI_ANY_SOURCE */) dest += hosts*extrhost;
             Goal::t_id id = goal.Recv(size*count, dest);
             if(print) goal.Comment("Recv end");
@@ -549,7 +557,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " irecv from " << dest << " time: " << tend-tstart <<  " size: "<< size*count << " tag: " << tag << " req " << req << std::endl;
             
             if(print) goal.Comment("Irecv begin");
-            goal.SetTag(((uint64_t) comm) << 32 | tag);
+            goal.SetTag(MAKE_TAG(comm,  tag));
             if(dest != -1 /* MPI_ANY_SOURCE */) dest += hosts*extrhost;
             Goal::t_id id = goal.Recv(size*count, dest);
             reqs[req] = id;
@@ -577,7 +585,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " send to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Send begin");
-            goal.SetTag(((uint64_t) comm) << 32 | tag);
+            goal.SetTag(MAKE_TAG(comm,  tag));
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             if(print) goal.Comment("Send end");
 
@@ -603,7 +611,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " rsend to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << std::endl;
             
             if(print) goal.Comment("Rsend begin");
-            goal.SetTag(((uint64_t) comm) << 32 | tag);
+            goal.SetTag(MAKE_TAG(comm,  tag));
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             if(print) goal.Comment("Rsend end");
 
@@ -630,7 +638,7 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " isend to " << dest << " time: " << tend-tstart <<  " size: " << size*count << " tag: " << tag << " req " << req << std::endl;
             
             if(print) goal.Comment("Isend begin");
-            goal.SetTag(((uint64_t) comm << 32) | tag);
+            goal.SetTag(MAKE_TAG(comm, tag));
             Goal::t_id id = goal.Send(size*count, dest+hosts*extrhost);
             reqs[req] = id;
             if(print) goal.Comment("Isend end");
@@ -731,9 +739,9 @@ void process_trace(gengetopt_args_info *args_info) {
             if(print) std::cout <<  " sendrecv - send to " << sdest << " size: " << ssize*scount << " tag: " << stag << "; recv from " << rsource << " size: " << rsize*rcount << " tag: " << rtag << "; time: " << tend-tstart <<  std::endl;
             
             if(print) goal.Comment("Sendrecv begin");
-            goal.SetTag(((uint64_t) comm << 32) | stag);
+            goal.SetTag(MAKE_TAG(comm, stag));
             Goal::t_id sid = goal.Send(ssize*scount, sdest+hosts*extrhost);
-            goal.SetTag(((uint64_t) comm << 32) | stag);
+            goal.SetTag(MAKE_TAG(comm, stag));
             Goal::t_id rid = goal.Recv(rsize*rcount, rsource+hosts*extrhost);
             if(print) goal.Comment("Sendrecv end");
 
@@ -811,7 +819,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Barrier begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, 1);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -844,7 +852,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Allreduce begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -878,7 +886,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Bcast begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_binomial_tree_bcast_rank(&goal, root, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -910,7 +918,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Allgather begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -949,7 +957,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Reduce begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_binomial_tree_reduce_rank(&goal, root, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
@@ -981,7 +989,7 @@ void process_trace(gengetopt_args_info *args_info) {
             }
 
             if(print) goal.Comment("Alltoall begin");
-            goal.SetTag(((uint64_t) comm << 32) | (collsbase+nops));
+            goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
             goal.StartOp();
             create_linear_alltoall_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
             std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
