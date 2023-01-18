@@ -25,7 +25,7 @@ int MAKE_TAG(int comm, int tag) {
  
 
 // TODO: dangerous
-static const int req_size = 4;
+static const int req_size = 8;
 static const int mpi_any_source = -1;
 static const int collsbase=1000000;
 static const int MAX_STRLEN = 4096;
@@ -34,7 +34,7 @@ static const int MAX_STRLEN = 4096;
 static int print=0;
 
 // arrays of MPI functions to match, may not contain '\0' or ':' in function name!
-static const char *mpifuncs[] = { "MPI_Allreduce" , "MPI_Alltoall", "MPI_Bcast", "MPI_Barrier", "MPI_Init", "MPI_Finalize",
+static const char *mpifuncs[] = { "MPI_Allreduce" , "MPI_Iallreduce", "MPI_Alltoall", "MPI_Bcast", "MPI_Barrier", "MPI_Init", "MPI_Finalize",
 "MPI_Alltoallv", "MPI_Scatter", "MPI_Scatterv", "MPI_Gather", "MPI_Gatherv", "MPI_Allgather", "MPI_Allgatherv", "MPI_Reduce", "MPI_Irecv",
 "MPI_Send", "MPI_Recv", "MPI_Comm_rank", "MPI_Comm_size", "MPI_Isend", "MPI_Wait", "MPI_Waitall", "MPI_Iprobe", "MPI_Testall", "MPI_Test", 
 "MPI_Scan", "MPI_Exscan", "MPI_Get_count", "MPI_Sendrecv", "MPI_Rsend", /* end marker */ "\0" };
@@ -286,7 +286,7 @@ void change_zero_to_host(char *mask, char *buffer, int host) {
   sprintf(buffer, "%s%i%s", str_start, host, str_end);
 }
 
-static inline void finish_coll(std::string collname /* the op id */, 
+static inline Goal::t_id finish_coll(std::string collname /* the op id */, 
                           std::pair<Goal::locop,Goal::locop> ops /* dependent operations */,
                           double tstart,
                           double tend,
@@ -335,6 +335,7 @@ static inline void finish_coll(std::string collname /* the op id */,
   // this is for the next localop! (which can only happen after the
   // current collective ends
   curlocop->prev = make_vector(std::make_pair(collop,LocOp::REQU));
+  return collop;
 }
 
 
@@ -764,6 +765,7 @@ void process_trace(gengetopt_args_info *args_info) {
 
         static const htorMatcher e_barr(&pars, "MPI_Barrier");
         static const htorMatcher e_allred(&pars, "MPI_Allreduce");
+        static const htorMatcher e_iallred(&pars, "MPI_Iallreduce");
         static const htorMatcher e_bcast(&pars, "MPI_Bcast");
         static const htorMatcher e_allgather(&pars, "MPI_Allgather");
         static const htorMatcher e_allgatherv(&pars, "MPI_Allgatherv");
@@ -870,6 +872,41 @@ void process_trace(gengetopt_args_info *args_info) {
             goto endloop;
           }
 
+          /**** Iallreduce */
+          // MPI_Iallreduce(                            sendbuf,          recvbuf,          count, datatype, op, comm,               req) 
+          // MPI_Iallreduce: 59807782                : 139944565018640 : 139944544235536 : 5194816: 8,4,4 : 3 : 94853248035456,0,4 : 140737109594760 : 59813207
+          if(pars.match(&e_iallred, funchash, line, &match)) {
+            int count; match.get(4,&count);
+            int size; match.get(6,&size);
+            int p; match.get(11,&p);
+            double tstart; match.get(1,&tstart);
+            double req; match.get(12,&req);
+            double tend; match.get(13,&tend);
+
+            //std::cout << line << std::endl;
+            if(print) std::cout <<  " allreduce " << nops <<" (" <<p<< ") time " << tend-tstart<< " size: " << count*size<< std::endl;
+
+            if(p != hosts) {
+              std::cerr << "collective on subcommunicator p=" << p << ", hosts=" << hosts << " - ignoring\n";
+              continue;
+            }
+
+            if(print) goal.Comment("Iallreduce begin");
+            goal.SetTag(collsbase+nops);
+            goal.StartOp();
+            create_dissemination_rank(&goal, host+hosts*extrhost, hosts*extrhosts, count*size);
+            std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
+
+
+            reqs[req] = finish_coll("iallreduce", ops, tstart, tend, nbcify, &curlocop, &goal); 
+
+            if(print) goal.Comment("Iallreduce end");
+
+            nops++;
+            goto endloop;
+          }
+
+ 
           /**** Bcast */
           // MPI_Bcast(                            void* buffer, int count, MPI_Datatype datatype, int root, MPI_Comm comm ) 
           // MPI_Bcast : 1225632902659657.000000 : 140733419888320 : 3 : 21,1,1 : 0 : 0,0,32 : 1225632902659726.000000
