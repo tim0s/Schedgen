@@ -34,6 +34,8 @@
   if (vrank == root) rank = 0; \
 } 
 
+int MAKE_TAG(int comm, int tag);
+
 Goal::Goal(gengetopt_args_info *args_info, int nranks) : sends(0), recvs(0), execs(0), ranks(0), reqs(0), curtag(-1) {
 	// create filename
 	this->filename.clear();
@@ -885,6 +887,56 @@ void create_linear_alltoall(gengetopt_args_info *args_info) {
 }
 
 
+void create_resnet152(gengetopt_args_info *args_info) {
+
+    int collsbase = 100000; // needed to create tag, must be higher than the send/recvs in this schedule (0 here)
+    int nops = 0; // running count of colls for collective tag matching
+    int comm = 1; // only one comm used here
+    int comm_size = args_info->commsize_arg;
+    Goal goal(args_info, comm_size);
+    
+    // The recipe for this was taken from https://github.com/spcl/DNN-cpp-proxies 1d32dce
+    // allreduce sizes for gradients with message aggregation
+    #define NUM_B 10
+    int allreduce_sizes[NUM_B] = {6511592, 6567936, 5905920, 6113280, 6176256, 6112768, 6176256, 6112768, 5321216, 5194816};
+    // batchsize = 128
+    // Suggest world_size <= 256, which is corresponding to a global batch_size <= 32 K
+    // A100 GPU
+    // runtime in us (10E-6) for each iteration 
+    int fwd_rt_whole_model = 119000;
+    int bwd_rt_per_B = 23800;
+
+    for (int src_rank=0; src_rank<comm_size; src_rank++) {
+        goal.StartRank(src_rank);
+            int fwd_cmp = goal.Exec("forward_compute", fwd_rt_whole_model, 0); //compute
+    	    for(int i=0; i<NUM_B; i++) {
+                //omitted progressing of MPI using Testany, no effect in goal
+                int bkw_cmp = goal.Exec("backward_compute", bwd_rt_per_B, 0);
+		goal.Requires(bkw_cmp, fwd_cmp);
+                
+		int dummy = goal.Exec("backward_compute_dummy", 0, 0);
+		goal.Requires(dummy, bkw_cmp);
+                
+		//MPI_Iallreduce(allreduce_size[i], MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD, req[i]);
+                goal.Comment("Iallreduce begin");
+                goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
+                goal.StartOp();
+                create_dissemination_rank(&goal, src_rank, comm_size, allreduce_sizes[i]*4);
+                std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
+  		Goal::locop::iterator it;
+                for(it=ops.second.begin(); it!=ops.second.end(); it++) { 
+                  goal.Requires(it->first, dummy); 
+                }
+		goal.Comment("Iallreduce end");
+		nops++;
+            }
+            //MPI_Waitall(req);
+        goal.EndRank();
+    }
+    goal.Write();
+
+}
+
 int main(int argc, char **argv) {
 	
 	gengetopt_args_info args_info;
@@ -936,7 +988,9 @@ int main(int argc, char **argv) {
 	if (strcmp(args_info.ptrn_arg, "linear_alltoall") == 0) {
 		 create_linear_alltoall(&args_info);
 	}
-
+	if (strcmp(args_info.ptrn_arg, "resnet152") == 0) {
+		 create_resnet152(&args_info);
+	}
 
 	if (strcmp(args_info.ptrn_arg, "trace") == 0) {
     // see process_trace.cpp 

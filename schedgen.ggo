@@ -2,7 +2,7 @@ package "schedgen"
 version "0.1"
 
 option "ptrn"        p "Name of the communication pattern that should be used to generate a schedule"
-							values="binomialtreereduce","binarytreebcast","binomialtreebcast","nwaydissemination","pipelinedring","pipelinedringdep","doublering","gather","scatter","linbarrier","trace","dissemination","random_bisect","random_bisect_fd_sym","linear_alltoall"
+							values="binomialtreereduce","binarytreebcast","binomialtreebcast","nwaydissemination","pipelinedring","pipelinedringdep","doublering","gather","scatter","linbarrier","trace","dissemination","random_bisect","random_bisect_fd_sym","linear_alltoall","resnet152"
 							default="binomialtreebcast" string optional
 option "commsize"    s "Number of nodes that should be used in the communication pattern" default="8" int optional
 option "timemult"    - "Time multiplier, relative to microsecond (e.g., nanoseconds -> 1000)" default="1000" int optional
