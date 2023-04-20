@@ -865,27 +865,154 @@ void create_random_bisect_fd_sym(gengetopt_args_info *args_info) {
 }
 
 void create_linear_alltoall_rank(Goal *goal, int src_rank, int comm_size, int datasize) {
- for (int dst_rank = 0; dst_rank < comm_size-1; dst_rank++) {
-    goal->Send(datasize, (src_rank+1+dst_rank)%comm_size);
-    goal->Recv(datasize, (src_rank-1-dst_rank+2*comm_size)%comm_size);	
-  } 
+ 	for (int step = 1; step < comm_size; step++) {
+		int send_to = (src_rank + step) % comm_size;
+		int recv_from = mymod(src_rank - step, comm_size);
+    	goal->Send(datasize, send_to);
+    	goal->Recv(datasize, recv_from);	
+  	} 
 }
 
 void create_linear_alltoall(gengetopt_args_info *args_info) {
-	
 	int comm_size = args_info->commsize_arg;
 	int datasize = args_info->datasize_arg;
 	
 	Goal goal(args_info, comm_size);
 
 	for (int src_rank = 0; src_rank < comm_size; src_rank++) {
-    goal.StartRank(src_rank);
-    create_linear_alltoall_rank(&goal, src_rank, comm_size, datasize);
-    goal.EndRank();
-  }
-  goal.Write();
+    	goal.StartRank(src_rank);
+    	create_linear_alltoall_rank(&goal, src_rank, comm_size, datasize);
+    	goal.EndRank();
+  	}
+  	goal.Write();
 }
 
+void create_linear_alltoallv_rank(Goal *goal, int src_rank, int comm_size, std::vector<std::vector<int>>& sizes) {
+ 	for (int step = 1; step < comm_size; step++) {
+		int send_to = (src_rank + step) % comm_size;
+		int recv_from = mymod(src_rank - step, comm_size);
+    	goal->Send(sizes[src_rank][send_to], send_to);
+    	goal->Recv(sizes[recv_from][src_rank], recv_from);	
+  	} 
+}
+
+void create_linear_alltoallv(gengetopt_args_info *args_info) {
+	int comm_size = args_info->commsize_arg;
+	int datasize = args_info->datasize_arg;
+	
+	Goal goal(args_info, comm_size);
+	std::vector<std::vector<int>> sizes(comm_size);
+	// Generate random sizes
+	for (int i = 0; i < comm_size; i++){
+		sizes[i].reserve(comm_size);
+		for(int j = 0; j < comm_size; j++){
+			if(j == args_info->root_arg){
+				sizes[i][j] = datasize;
+			}else{
+				sizes[i][j] = (rand() % (datasize / args_info->a2av_skew_ratio_arg)) + 1; // +1 to avoid sending 0 bytes
+			}
+		}
+	}
+
+	for (int src_rank = 0; src_rank < comm_size; src_rank++) {
+    	goal.StartRank(src_rank);
+    	create_linear_alltoallv_rank(&goal, src_rank, comm_size, sizes);
+    	goal.EndRank();
+  	}
+  	goal.Write();
+}
+
+void create_allreduce_recdoub_rank(Goal *goal, int src_rank, int comm_size, int datasize, int replace_comptime) {
+	int mask = 0x1;
+	int next_datasize = datasize;
+	int last_recv = -1;
+	int send_id = -1;	
+	int num_steps_per_phase = log2(comm_size);
+	// Reduce-scatter
+ 	for (int step = 0; step < num_steps_per_phase; step++) {
+		int dest = src_rank ^ mask;
+		next_datasize /= 2;
+    	send_id = goal->Send(next_datasize, dest);		
+		if(last_recv != -1){
+			goal->Requires(send_id, last_recv);
+		}
+    	last_recv = goal->Recv(next_datasize, dest);	
+		if(replace_comptime != -1){
+			// By doing so, next send will have a dependencies on the compute
+			// rather than on the recv. This allows us simulating a fixed intermsg
+			// gap rather than an actual dependency.
+			last_recv = goal->Exec("intermsg-gap", replace_comptime, 0);
+		}
+		mask <<= 1;		
+  	} 
+
+	// Allgather
+	mask >>= 1;
+ 	for (int step = 0; step < num_steps_per_phase; step++) {
+		int dest = src_rank ^ mask;		
+    	send_id = goal->Send(next_datasize, dest);
+		if(last_recv != -1){
+			goal->Requires(send_id, last_recv);
+		}
+    	last_recv = goal->Recv(next_datasize, dest);
+		if(replace_comptime != -1 && step != num_steps_per_phase - 1){
+			// By doing so, next send will have a dependencies on the compute
+			// rather than on the recv. This allows us simulating a fixed intermsg
+			// gap rather than an actual dependency.
+			last_recv = goal->Exec("intermsg-gap", replace_comptime, 0);
+		}
+		next_datasize *= 2;
+		mask >>= 1;
+  	} 
+}
+
+void create_allreduce_recdoub(gengetopt_args_info *args_info) {
+	int comm_size = args_info->commsize_arg;
+	int datasize = args_info->datasize_arg;
+	int replace_comptime = args_info->rpl_dep_cmp_arg;
+	
+	Goal goal(args_info, comm_size);
+
+	for (int src_rank = 0; src_rank < comm_size; src_rank++) {
+    	goal.StartRank(src_rank);
+    	create_allreduce_recdoub_rank(&goal, src_rank, comm_size, datasize, replace_comptime);
+    	goal.EndRank();
+  	}
+  	goal.Write();
+}
+
+
+void create_allreduce_ring_rank(Goal *goal, int src_rank, int comm_size, int datasize) {
+	int last_recv = -1;
+	int send_id = -1;	
+	int chunk_size = datasize / comm_size;
+	// Phase 0: reduce-scatter, phase 1: allgather
+	for (int phase = 0; phase < 2; phase++){
+		for (int step = 0; step < comm_size - 1; step++) {
+			int send_to = (src_rank + 1) % comm_size;
+			int recv_from = mymod(src_rank - 1, comm_size);
+			send_id = goal->Send(chunk_size, send_to);		
+			if(last_recv != -1){
+				goal->Requires(send_id, last_recv);
+			}
+			last_recv = goal->Recv(chunk_size, recv_from);	
+		} 
+	}
+}
+
+void create_allreduce_ring(gengetopt_args_info *args_info) {
+	int comm_size = args_info->commsize_arg;
+	int datasize = args_info->datasize_arg;
+	
+	Goal goal(args_info, comm_size);
+
+	for (int src_rank = 0; src_rank < comm_size; src_rank++) {
+    	goal.StartRank(src_rank);
+    	create_allreduce_ring_rank(&goal, src_rank, comm_size, datasize);
+    	goal.EndRank();
+  	}
+  	goal.Write();
+}
 
 void create_resnet152(gengetopt_args_info *args_info) {
 
@@ -987,6 +1114,15 @@ int main(int argc, char **argv) {
 	}
 	if (strcmp(args_info.ptrn_arg, "linear_alltoall") == 0) {
 		 create_linear_alltoall(&args_info);
+	}
+	if (strcmp(args_info.ptrn_arg, "linear_alltoallv") == 0) {
+		 create_linear_alltoallv(&args_info);
+	}
+	if (strcmp(args_info.ptrn_arg, "allreduce_recdoub") == 0) {
+		 create_allreduce_recdoub(&args_info);
+	}
+	if (strcmp(args_info.ptrn_arg, "allreduce_ring") == 0) {
+		 create_allreduce_ring(&args_info);
 	}
 	if (strcmp(args_info.ptrn_arg, "resnet152") == 0) {
 		 create_resnet152(&args_info);
