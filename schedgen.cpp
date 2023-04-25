@@ -1090,7 +1090,7 @@ void create_chained_dissem(gengetopt_args_info *args_info) {
 		int marker = goal.Send(0, 9999999);
                 if (oldmarker != -1) {
 	          for(it=ops.first.begin(); it!=ops.first.end(); it++) {
-                    goal.Requires(it->first, marker);
+                    goal.Requires(it->first, oldmarker);
                   } 
 		}
 	        for(it=ops.second.begin(); it!=ops.second.end(); it++) { 
