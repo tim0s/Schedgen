@@ -1073,10 +1073,10 @@ void create_chained_dissem(gengetopt_args_info *args_info) {
     int comm_size = args_info->commsize_arg;
     int NUM_RUNS = 5;
     Goal goal(args_info, comm_size);
-    int oldmarker = -1;
     
     for (int src_rank=0; src_rank<comm_size; src_rank++) {
         goal.StartRank(src_rank);
+    	int oldmarker = -1;
     	int nops = 0; // running count of colls for collective tag matching
     	    for(int i=0; i<NUM_RUNS; i++) {
                 goal.Comment("Iallreduce begin");
