@@ -887,7 +887,7 @@ void create_linear_alltoall(gengetopt_args_info *args_info) {
   	goal.Write();
 }
 
-void create_linear_alltoallv_rank(Goal *goal, int src_rank, int comm_size, std::vector<std::vector<int>>& sizes) {
+void create_linear_alltoallv_rank(Goal *goal, int src_rank, int comm_size, std::vector<std::vector<int> > & sizes) {
  	for (int step = 1; step < comm_size; step++) {
 		int send_to = (src_rank + step) % comm_size;
 		int recv_from = mymod(src_rank - step, comm_size);
@@ -901,7 +901,7 @@ void create_linear_alltoallv(gengetopt_args_info *args_info) {
 	int datasize = args_info->datasize_arg;
 	
 	Goal goal(args_info, comm_size);
-	std::vector<std::vector<int>> sizes(comm_size);
+	std::vector<std::vector<int> > sizes(comm_size);
 	// Generate random sizes
 	for (int i = 0; i < comm_size; i++){
 		sizes[i].reserve(comm_size);
@@ -1064,6 +1064,48 @@ void create_resnet152(gengetopt_args_info *args_info) {
 
 }
 
+
+
+void create_chained_dissem(gengetopt_args_info *args_info) {
+
+    int collsbase = 100000; // needed to create tag, must be higher than the send/recvs in this schedule (0 here)
+    int comm = 1; // only one comm used here
+    int comm_size = args_info->commsize_arg;
+    int NUM_RUNS = 5;
+    Goal goal(args_info, comm_size);
+    int oldmarker = -1;
+    
+    for (int src_rank=0; src_rank<comm_size; src_rank++) {
+        goal.StartRank(src_rank);
+    	int nops = 0; // running count of colls for collective tag matching
+    	    for(int i=0; i<NUM_RUNS; i++) {
+                goal.Comment("Iallreduce begin");
+                goal.SetTag(MAKE_TAG(comm, (collsbase+nops)));
+                goal.StartOp();
+                create_dissemination_rank(&goal, src_rank, comm_size, 10000);
+                std::pair<Goal::locop,Goal::locop> ops = goal.EndOp();
+  		Goal::locop::iterator it;
+		goal.Comment("Iallreduce end");
+		nops++;
+		int marker = goal.Send(0, 9999999);
+                if (oldmarker != -1) {
+	          for(it=ops.first.begin(); it!=ops.first.end(); it++) {
+                    goal.Requires(it->first, marker);
+                  } 
+		}
+	        for(it=ops.second.begin(); it!=ops.second.end(); it++) { 
+                  goal.Requires(marker, it->first); 
+                }
+                oldmarker = marker;
+	
+            }
+        goal.EndRank();
+    }
+    goal.Write();
+
+}
+
+
 int main(int argc, char **argv) {
 	
 	gengetopt_args_info args_info;
@@ -1126,6 +1168,9 @@ int main(int argc, char **argv) {
 	}
 	if (strcmp(args_info.ptrn_arg, "resnet152") == 0) {
 		 create_resnet152(&args_info);
+	}
+	if (strcmp(args_info.ptrn_arg, "chained_dissem") == 0) {
+		 create_chained_dissem(&args_info);
 	}
 
 	if (strcmp(args_info.ptrn_arg, "trace") == 0) {
