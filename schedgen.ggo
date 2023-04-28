@@ -16,6 +16,7 @@ option "nb-poll" - "polling interval for nonblocking execution" default="0" int 
 option "cpu" - "select CPU to execute computation" default="0" int optional
 option "rpl-dep-cmp" - "replaces dependencies with fixed computation (parameter represents computation time. If -1, does not replace dependencies.)" default="-1" int optional
 option "a2av-skew-ratio" - "In the alltoallv pattern, each chunk of data sent by each rank is of a random size. The size of the chunk with id 'root' is of size 'datasize'. All the other chunks are of random size, and a2av-skew-ratio times smaller." default="1" int optional
+option "outcast" - "Generates outcast in the alltoallv pattern." flag off
 option "traces"      - "Tracefile for rank 0 (others are autodetected)" string optional
 option "traces-start" - "file with start lines in trace files (is updated after run if trace-nops is given)" string optional
 option "traces-nops" - "number of operations to write to file (0=all)" default="0" int optional

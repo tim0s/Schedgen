@@ -908,6 +908,8 @@ void create_linear_alltoallv(gengetopt_args_info *args_info) {
 		for(int j = 0; j < comm_size; j++){
 			if(j == args_info->root_arg){
 				sizes[i][j] = datasize;
+			}else if(args_info->outcast_flag && i == (args_info->root_arg + 1) % comm_size){
+				sizes[i][j] = datasize;
 			}else{
 				sizes[i][j] = (rand() % (datasize / args_info->a2av_skew_ratio_arg)) + 1; // +1 to avoid sending 0 bytes
 			}

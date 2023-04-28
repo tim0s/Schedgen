@@ -1,7 +1,7 @@
 #!/bin/bash
 rm traces/*
-GENERATE_ALLTOALL=false
-GENERATE_ALLTOALLV=false
+GENERATE_ALLTOALL=true
+GENERATE_ALLTOALLV=true
 GENERATE_ALLREDUCE=true
 
 for COMMSIZE in 16 128 1024 4096
@@ -22,6 +22,7 @@ do
                 if [ $DATASIZE -ge $SKEW_RATIO ];
                 then
                     ./schedgen -p linear_alltoallv -d ${DATASIZE} -s ${COMMSIZE} --a2av-skew-ratio ${SKEW_RATIO} -o traces/linear_alltoallv_${COMMSIZE}_${DATASIZE}_${SKEW_RATIO}.goal
+                    ./schedgen -p linear_alltoallv -d ${DATASIZE} -s ${COMMSIZE} --a2av-skew-ratio ${SKEW_RATIO} --outcast -o traces/linear_alltoallv_${COMMSIZE}_${DATASIZE}_${SKEW_RATIO}_outcast.goal
                 fi
             done
         fi
