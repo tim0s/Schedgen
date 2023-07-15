@@ -1,6 +1,6 @@
-CXXFLAGS=-g -O3 -Wno-deprecated -Wall
+CXXFLAGS=-g -O3 -Wno-deprecated -Wall -std=c++11
 CCFLAGS=-g -O3 -g
-LDFLAGS=-g -O3 -g #-lboost_iostreams-mt 
+LDFLAGS=-g -O3 -g -lboost_iostreams -L/opt/homebrew/lib/ 
 
 force: all
 
@@ -8,13 +8,13 @@ cmdline.c: schedgen.ggo
 	gengetopt < $<
 
 %.o: %.cpp *hpp *h
-	g++ $(CXXFLAGS) -c $<
+	${CXX} $(CXXFLAGS) -c $<
 
 %.o: %.c *h
-	gcc $(CCFLAGS) -c $<
+	${CC} $(CCFLAGS) -c $<
 
 all: buffer_element.o  cmdline.o  process_trace.o  schedgen.ggo  schedgen.o 
-	g++ $(CXXFLAGS) *.o -o schedgen $(LDFLAGS)
+	${CXX} $(CXXFLAGS) *.o -o schedgen $(LDFLAGS)
 
 clean:
 	rm -f *.o

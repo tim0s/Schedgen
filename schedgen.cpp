@@ -1037,13 +1037,14 @@ void create_allreduce_ring(gengetopt_args_info *args_info) {
   goal.Write();
 }
 
-void create_resnet152(gengetopt_args_info *args_info) {
+void create_resnet(gengetopt_args_info *args_info) {
 
   int collsbase = 100000; // needed to create tag, must be higher than the
                           // send/recvs in this schedule (0 here)
   int nops = 0;           // running count of colls for collective tag matching
   int comm = 1;           // only one comm used here
   int comm_size = args_info->commsize_arg;
+  printf("create resnet with %i nodes\n", comm_size);
   Goal goal(args_info, comm_size);
 
 // The recipe for this was taken from https://github.com/spcl/DNN-cpp-proxies
@@ -1059,6 +1060,7 @@ void create_resnet152(gengetopt_args_info *args_info) {
 
   for (int src_rank = 0; src_rank < comm_size; src_rank++) {
     goal.StartRank(src_rank);
+    nops = 0;
     int fwd_cmp = goal.Exec("forward_compute", fwd_rt_whole_model, 0); // compute
     for (int i = 0; i < NUM_B; i++) {
       // omitted progressing of MPI using Testany, no effect in goal
@@ -1139,64 +1141,66 @@ int main(int argc, char **argv) {
   if (strcmp(args_info.ptrn_arg, "binarytreebcast") == 0) {
     create_binary_tree_bcast(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "binomialtreebcast") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "binomialtreebcast") == 0) {
     create_binomial_tree_bcast(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "binomialtreereduce") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "binomialtreereduce") == 0) {
     create_binomial_tree_reduce(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "nwaydissemination") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "nwaydissemination") == 0) {
     create_nway_dissemination(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "pipelinedring") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "pipelinedring") == 0) {
     create_pipelined_ring(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "pipelinedringdep") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "pipelinedringdep") == 0) {
     create_pipelined_ring_dep(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "doublering") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "doublering") == 0) {
     create_double_ring(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "gather") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "gather") == 0) {
     create_gather(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "scatter") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "scatter") == 0) {
     create_scatter(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "linbarrier") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "linbarrier") == 0) {
     create_linbarrier(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "dissemination") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "dissemination") == 0) {
     create_dissemination(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "random_bisect") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "random_bisect") == 0) {
     create_random_bisect(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "random_bisect_fd_sym") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "random_bisect_fd_sym") == 0) {
     create_random_bisect_fd_sym(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "linear_alltoall") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "linear_alltoall") == 0) {
     create_linear_alltoall(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "linear_alltoallv") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "linear_alltoallv") == 0) {
     create_linear_alltoallv(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "allreduce_recdoub") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "allreduce_recdoub") == 0) {
     create_allreduce_recdoub(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "allreduce_ring") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "allreduce_ring") == 0) {
     create_allreduce_ring(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "resnet152") == 0) {
-    create_resnet152(&args_info);
+  else if (strcmp(args_info.ptrn_arg, "resnet") == 0) {
+    create_resnet(&args_info);
   }
-  if (strcmp(args_info.ptrn_arg, "chained_dissem") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "chained_dissem") == 0) {
     create_chained_dissem(&args_info);
   }
-
-  if (strcmp(args_info.ptrn_arg, "trace") == 0) {
+  else if (strcmp(args_info.ptrn_arg, "trace") == 0) {
     // see process_trace.cpp
     process_trace(&args_info);
+  }
+  else {
+    fprintf(stderr, "Unrecognized pattern: %s\n", args_info.ptrn_arg);
   }
 
   cmdline_parser_free(&args_info);
